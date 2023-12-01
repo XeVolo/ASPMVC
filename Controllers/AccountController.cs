@@ -17,8 +17,9 @@ namespace SystemyBazDanychP1.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+		private ApplicationDbContext db = new ApplicationDbContext();
 
-        public AccountController()
+		public AccountController()
         {
         }
 
@@ -151,8 +152,10 @@ namespace SystemyBazDanychP1.Controllers
         {
             if (ModelState.IsValid)
             {
-				var address = new AddressModel {Id=2, ZipCode = model.ZipCode, City = model.City, StreetAndBuildingNumber = model.StreetAndBuildingNumber, ApartmentNumber = model.ApartmentNumber };
-				var user = new ApplicationUser { UserName = model.Email,AddressId=1, Email = model.Email ,Name=model.Name,Surrname=model.Surrname};
+				var address = new AddressModel {ZipCode = model.ZipCode, City = model.City, StreetAndBuildingNumber = model.StreetAndBuildingNumber, ApartmentNumber = model.ApartmentNumber };
+				db.Addresses.Add(address);
+				db.SaveChanges();
+				var user = new ApplicationUser { UserName = model.Email,AddressId=address.Id, Email = model.Email ,Name=model.Name,Surrname=model.Surrname};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
