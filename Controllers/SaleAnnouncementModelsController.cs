@@ -36,11 +36,16 @@ namespace SystemyBazDanychP1.Controllers
             return View(saleAnnouncementModel);
         }
 
-        // GET: SaleAnnouncementModels/Create
-        public ActionResult Create()
-        {
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "Name");
-            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name");
+		// GET: SaleAnnouncementModels/Create
+		[Authorize]
+		public ActionResult Create()
+        {          
+			string id = HttpContext.User.Identity.Name;
+            var query =db.Users.Where(u => u.UserName == id).ToList();
+            
+
+			ViewBag.ProductId = new SelectList(db.Products, "Id", "Name");
+            ViewBag.SellerId = new SelectList(query,"Id","Name");
             return View();
         }
 
