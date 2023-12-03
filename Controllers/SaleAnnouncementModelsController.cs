@@ -39,11 +39,13 @@ namespace SystemyBazDanychP1.Controllers
 		// GET: SaleAnnouncementModels/Create
 		[Authorize]
 		public ActionResult Create()
-        {          
+        {
+			IdentityManager im = new IdentityManager();
 			string id = HttpContext.User.Identity.Name;
             var query =db.Users.Where(u => u.UserName == id).ToList();
-
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+	
+			im.AddUserToRoleByUsername(id, "Seller");
+			ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.SellerId = new SelectList(query,"Id","Name");
             return View();
         }

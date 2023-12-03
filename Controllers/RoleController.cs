@@ -26,7 +26,7 @@ namespace SystemyBazDanychP1.Controllers
 			IdentityManager im = new IdentityManager();
 
 			im.AddUserToRoleByUsername("", "Admin");
-			im.AddUserToRoleByUsername("", "User");
+			
 
 			return "OK";
 		}
