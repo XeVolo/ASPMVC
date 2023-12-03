@@ -42,9 +42,8 @@ namespace SystemyBazDanychP1.Controllers
         {          
 			string id = HttpContext.User.Identity.Name;
             var query =db.Users.Where(u => u.UserName == id).ToList();
-            
 
-			ViewBag.ProductId = new SelectList(db.Products, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.SellerId = new SelectList(query,"Id","Name");
             return View();
         }
@@ -54,18 +53,23 @@ namespace SystemyBazDanychP1.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,SellerId,Title,Description,Quantity,ProductId,Status,Date")] SaleAnnouncementModel saleAnnouncementModel)
+        public ActionResult Create(AnnouncementViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.SaleAnnouncements.Add(saleAnnouncementModel);
+                
+				var product = new ProductModel { Name = model.Name, CategoryId = model.CategoryId, Price = model.Price, IsDeleted = false };
+                db.Products.Add(product);
+				db.SaveChanges();
+				var announcement = new SaleAnnouncementModel { SellerId = model.SellerId, Title = model.Title, Description = model.Description, Quantity = model.Quantity, ProductId = product.Id, Status = model.Status, Date = model.Date };
+                db.SaleAnnouncements.Add(announcement);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "Name", saleAnnouncementModel.ProductId);
-            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name", saleAnnouncementModel.SellerId);
-            return View(saleAnnouncementModel);
+            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name", model.SellerId);
+            return View(model);
         }
 
         // GET: SaleAnnouncementModels/Edit/5
