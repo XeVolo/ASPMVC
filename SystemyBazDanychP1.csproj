@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressModelsController.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -294,6 +295,7 @@
     <Content Include="Views\SaleAnnouncementModels\Edit.cshtml" />
     <Content Include="Views\SaleAnnouncementModels\Index.cshtml" />
     <Content Include="Views\SaleAnnouncementModels\Details.cshtml" />
+    <Content Include="Views\Basket\BasketView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
