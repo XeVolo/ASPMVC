@@ -188,6 +188,7 @@
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductModelsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleAnnouncementModelsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -304,6 +305,11 @@
     <Content Include="Views\CategoryModels\Index.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\Basket\BasketView.cshtml" />
+    <Content Include="Views\ProductModels\Create.cshtml" />
+    <Content Include="Views\ProductModels\Delete.cshtml" />
+    <Content Include="Views\ProductModels\Details.cshtml" />
+    <Content Include="Views\ProductModels\Edit.cshtml" />
+    <Content Include="Views\ProductModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />

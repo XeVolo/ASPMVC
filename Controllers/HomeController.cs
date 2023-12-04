@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -20,6 +21,7 @@ namespace SystemyBazDanychP1.Controllers
 			var saleAnnouncementModels = db.SaleAnnouncements.Include(s => s.Product).Include(s => s.User);
 			return View(saleAnnouncementModels.ToList());
 		}
+		
 		public ActionResult Details(int? id)
 		{
 			if (id == null)
@@ -33,6 +35,7 @@ namespace SystemyBazDanychP1.Controllers
 			}
 			return View(saleAnnouncementModel);
 		}
+		
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
@@ -45,6 +48,56 @@ namespace SystemyBazDanychP1.Controllers
 			ViewBag.Message = "Your contact page.";
 
 			return View();
+		}
+
+		[HttpPost]
+		public ActionResult Details(int? id,int ?nicxD)
+		{
+			List<int> products=new List<int>();
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			SaleAnnouncementModel saleAnnouncementModel = db.SaleAnnouncements.Find(id);
+			if (saleAnnouncementModel == null)
+			{
+				return HttpNotFound();
+			}
+			var productid= Convert.ToString(saleAnnouncementModel.ProductId);
+			HttpCookie cookie;
+
+			if (!string.IsNullOrEmpty(productid))
+			{
+				cookie = Request.Cookies["a"];
+				if(cookie == null)
+				{
+					cookie = new HttpCookie("a");
+					cookie.Value = productid;
+					Response.Cookies.Add(cookie);
+				}
+				else
+				{
+					string xd = Request.Cookies["a"].Value; 
+					var idlist = xd.Split(' ');
+					for (int i = 0; i <= idlist.Length-1;i++)
+					{
+						int id1 = Convert.ToInt32(idlist[i]);
+						products.Add(id1);
+					}
+					products.Add(Convert.ToInt32(productid));
+					string resoult = "";
+					foreach (var id2 in products)
+					{
+						resoult = resoult + id2 + " ";
+					}
+					cookie.Value = resoult;
+				}
+				
+				Response.Cookies.Add(cookie);
+			}
+
+
+			return View(saleAnnouncementModel);
 		}
 	}
 }
