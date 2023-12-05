@@ -310,6 +310,7 @@
     <Content Include="Views\ProductModels\Details.cshtml" />
     <Content Include="Views\ProductModels\Edit.cshtml" />
     <Content Include="Views\ProductModels\Index.cshtml" />
+    <Content Include="Views\Basket\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
