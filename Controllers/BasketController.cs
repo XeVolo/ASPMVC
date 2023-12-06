@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -86,16 +87,20 @@ namespace SystemyBazDanychP1.Controllers
 					help.TotalPrice = help.Quantity * help.Price;
 				}
 			}
+			double totalprice = 0;
 			foreach(var item1 in orderProducts)
 			{
                 var orderprod = new OrderProduct { ProductId = item1.ProductId, OrderId = item1.OrderId, Price = item1.Price, Quantity = item1.Quantity, TotalPrice = item1.TotalPrice };
+				totalprice += item1.TotalPrice;
 				db.OrderProducts.Add(orderprod);
                 db.SaveChanges();
             }
+			order.TotalPrice = totalprice;
+			db.Entry(order).State = EntityState.Modified;
+			db.SaveChanges();
 
 
-
-            return View(); ;
+			return View(); ;
 		}
 
 	}
