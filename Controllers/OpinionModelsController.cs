@@ -47,7 +47,7 @@ namespace SystemyBazDanychP1.Controllers
 
             var query2=db.SaleAnnouncements.Where(u => u.Id == id).ToList();
 
-			ViewBag.SaleAnnouncementId = new SelectList(userid, "Id", "SaleAnnouncementId");
+			ViewBag.SaleAnnouncementId = new SelectList(query2, "Id", "Title");
             ViewBag.ClientId = new SelectList(query, "Id", "Name");
             return View();
         }
@@ -63,7 +63,7 @@ namespace SystemyBazDanychP1.Controllers
             {
                 db.Opinions.Add(opinionModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.SaleAnnouncementId = new SelectList(db.SaleAnnouncements, "Id", "SellerId", opinionModel.SaleAnnouncementId);

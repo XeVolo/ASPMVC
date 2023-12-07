@@ -33,6 +33,13 @@ namespace SystemyBazDanychP1.Controllers
 			{
 				return HttpNotFound();
 			}
+
+			var query1 = db.Opinions.Where(x => x.SaleAnnouncementId == id).ToList();
+			foreach(var i in query1)
+			{
+				i.ClientId = db.Users.Find(i.ClientId).Name;
+			}
+			ViewBag.Opinions = query1;
 			return View(saleAnnouncementModel);
 		}
 		

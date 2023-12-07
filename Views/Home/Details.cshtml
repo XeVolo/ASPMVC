@@ -77,5 +77,21 @@
         </div>
     }
     @Html.ActionLink("Back to List", "Index")
-    @Html.ActionLink("Dodaj opinie", "Create","OpinionModels", new { id = this.Model.Id})
+
+    @Html.ActionLink("Dodaj opinie", "Create", "OpinionModels", new { id = this.Model.Id }, new { @class = "nav-link" })
 </p>
+<h4>Opinie:</h4>
+<div>
+<dl>
+    @foreach(var item in ViewBag.Opinions)
+            {
+        <dt>
+            @item.ClientId
+        </dt>
+        <dd>
+            @item.Description
+        </dd>
+
+            }
+</dl>
+</div>
