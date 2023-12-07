@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ProductModelsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleAnnouncementModelsController.cs" />
+    <Compile Include="Controllers\SpecialOfferModelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +318,11 @@
     <Content Include="Views\OpinionModels\Details.cshtml" />
     <Content Include="Views\OpinionModels\Edit.cshtml" />
     <Content Include="Views\OpinionModels\Index.cshtml" />
+    <Content Include="Views\SpecialOfferModels\Create.cshtml" />
+    <Content Include="Views\SpecialOfferModels\Delete.cshtml" />
+    <Content Include="Views\SpecialOfferModels\Details.cshtml" />
+    <Content Include="Views\SpecialOfferModels\Edit.cshtml" />
+    <Content Include="Views\SpecialOfferModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
