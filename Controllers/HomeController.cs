@@ -18,10 +18,13 @@ namespace SystemyBazDanychP1.Controllers
 		// GET: SaleAnnouncementModels
 		public ActionResult Index()
 		{
+
+			var adminUsers = db.Users
+				.Where(u => u.Roles.Any(ur => ur.RoleId == "2f0648b3-4dd5-4941-a560-c80e91ab7765"))
+				.Select(u => new { u.UserName, u.Email })
+				.ToList();
+
 			var saleAnnouncementModels = db.SaleAnnouncements.Include(s => s.Product).Include(s => s.User).ToList();
-			
-
-
 			return View(saleAnnouncementModels);
 		}
 		
