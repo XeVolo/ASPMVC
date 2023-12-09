@@ -17,8 +17,10 @@ namespace SystemyBazDanychP1.Controllers
         // GET: SpecialOfferModels
         public ActionResult Index()
         {
-            var specialOfferts = db.SpecialOfferts.Include(s => s.SaleAnnouncement);
+          
+			var specialOfferts = db.SpecialOfferts.Include(s => s.SaleAnnouncement);
             return View(specialOfferts.ToList());
+
         }
 
         // GET: SpecialOfferModels/Details/5
