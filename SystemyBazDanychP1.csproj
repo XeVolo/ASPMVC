@@ -193,6 +193,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleAnnouncementModelsController.cs" />
     <Compile Include="Controllers\SpecialOfferModelsController.cs" />
+    <Compile Include="Controllers\SupportChatModelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,7 @@
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\OpinionModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderProduct.cs" />
@@ -323,6 +325,11 @@
     <Content Include="Views\SpecialOfferModels\Details.cshtml" />
     <Content Include="Views\SpecialOfferModels\Edit.cshtml" />
     <Content Include="Views\SpecialOfferModels\Index.cshtml" />
+    <Content Include="Views\SupportChatModels\Create.cshtml" />
+    <Content Include="Views\SupportChatModels\Delete.cshtml" />
+    <Content Include="Views\SupportChatModels\Details.cshtml" />
+    <Content Include="Views\SupportChatModels\Edit.cshtml" />
+    <Content Include="Views\SupportChatModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
