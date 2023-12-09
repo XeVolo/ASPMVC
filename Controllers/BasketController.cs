@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using SystemyBazDanychP1.Models;
 
 namespace SystemyBazDanychP1.Controllers
@@ -31,7 +32,8 @@ namespace SystemyBazDanychP1.Controllers
 				foreach (var id2 in products)
 				{
 					ProductModel prod= db.Products.Find(id2);
-					products2.Add(prod);
+					ProductModel prod3 = new ProductModel { Id = prod.Id, Name = prod.Name, CategoryId = prod.CategoryId, Price = prod.Price, IsDeleted = prod.IsDeleted };
+					products2.Add(prod3);
 				}			
 			}
 			else
@@ -39,7 +41,23 @@ namespace SystemyBazDanychP1.Controllers
 				ViewBag.Message = "Ciasteczko [a] nie istnieje";
 				return View(products2); ;
 			}
-
+			int promotion = 0;
+			for(int i=0;i<products2.Count;i++)
+			{
+				var id3= products2[i];
+				var query1 = db.SaleAnnouncements.Where(x=>x.ProductId==id3.Id).ToList();
+				if (query1.Count == 1)
+				{
+					int idc = query1[0].Id;
+					var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == idc).Where(x => x.ExpirationDate >= DateTime.Today).ToList();
+					if (query2.Count == 1) 
+					{ 
+						 promotion = query2[0].PromotionValue;
+						id3.Price = id3.Price * promotion * 0.01;
+					}
+				}
+			}
+			
 			return View(products2);
 		}
 		[Authorize]
@@ -62,10 +80,27 @@ namespace SystemyBazDanychP1.Controllers
                 foreach (var id2 in products)
                 {
                     ProductModel prod = db.Products.Find(id2);
-                    products2.Add(prod);
-                }
+					ProductModel prod3 = new ProductModel { Id = prod.Id, Name = prod.Name, CategoryId = prod.CategoryId, Price = prod.Price, IsDeleted = prod.IsDeleted };
+					products2.Add(prod3);
+				}
             }
-            IdentityManager im = new IdentityManager();
+			int promotion = 0;
+			foreach (var id3 in products2)
+			{
+				var query1 = db.SaleAnnouncements.Where(x => x.ProductId == id3.Id).ToList();
+				if (query1.Count == 1)
+				{
+					int idc = query1[0].Id;
+					var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == idc).Where(x => x.ExpirationDate >= DateTime.Today).ToList();
+					if (query2.Count == 1)
+					{
+						promotion = query2[0].PromotionValue;
+						id3.Price = id3.Price * promotion * 0.01;
+					}
+				}
+			}
+
+			IdentityManager im = new IdentityManager();
             string id = HttpContext.User.Identity.Name;
             var query = db.Users.Where(u => u.UserName == id).ToList();
             var order = new OrderModel { DateTime = DateTime.Today, TotalPrice = 0, ClientId = query[0].Id,Status="Przetwarzane" };

@@ -19,18 +19,7 @@ namespace SystemyBazDanychP1.Controllers
 		public ActionResult Index()
 		{
 			var saleAnnouncementModels = db.SaleAnnouncements.Include(s => s.Product).Include(s => s.User).ToList();
-			/*
-			//chyba lepiej po prostu wyświetlanie promocji cene zmieniać dopiero w koszyku na order product
-			foreach (var s in saleAnnouncementModels)
-			{
-                //dopisać warunek daty konca promocji pozniej niż aktualna
-                var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == s.Id).ToList();
-				if (query2 != null)
-				{
-					s.Product.Price= s.Product.Price * query2[0].PromotionValue*0.01;
-                }
-            }
-			*/
+			
 
 
 			return View(saleAnnouncementModels);
@@ -54,11 +43,10 @@ namespace SystemyBazDanychP1.Controllers
 				i.ClientId = db.Users.Find(i.ClientId).Name;
 			}
 			ViewBag.Opinions = query1;
-			/*
-			//dopisać warunek daty konca promocji pozniej niż aktualna
-            var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == id).ToList();
+			
+            var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == id ).Where(x=>x.ExpirationDate>=DateTime.Today).ToList();
 			ViewBag.Promotion = query2;
-			*/
+			
             return View(saleAnnouncementModel);
 		}
 		
@@ -122,6 +110,15 @@ namespace SystemyBazDanychP1.Controllers
 				Response.Cookies.Add(cookie);
 			}
 
+			var query1 = db.Opinions.Where(x => x.SaleAnnouncementId == id).ToList();
+			foreach (var i in query1)
+			{
+				i.ClientId = db.Users.Find(i.ClientId).Name;
+			}
+			ViewBag.Opinions = query1;
+
+			var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == id).Where(x => x.ExpirationDate >= DateTime.Today).ToList();
+			ViewBag.Promotion = query2;
 
 			return View(saleAnnouncementModel);
 		}
