@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,6 +16,7 @@ namespace SystemyBazDanychP1.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -110,24 +112,28 @@ namespace SystemyBazDanychP1.Controllers
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        public ActionResult AddPhoneNumber(AddPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
+            ManageMessageId? message;
+
+            if (ModelState.IsValid)
             {
-                return View(model);
+                var phoneNumber = model.Number;
+                IdentityManager im = new IdentityManager();
+                string id = HttpContext.User.Identity.Name;
+                var query = db.Users.Where(u => u.UserName == id).FirstOrDefault();
+                query.PhoneNumber = phoneNumber;
+                db.Entry(query).State = EntityState.Modified;
+                db.SaveChanges();
+                message = ManageMessageId.AddPhoneSuccess;
+                return View("Index", new { Message = message });
             }
-            // Wygeneruj i wyślij token
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
+            else
             {
-                var message = new IdentityMessage
-                {
-                    Destination = model.Number,
-                    Body = "Twój kod zabezpieczający: " + code
-                };
-                await UserManager.SmsService.SendAsync(message);
+                message = ManageMessageId.Error;
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+
+            return RedirectToAction("Index", new { Message = message });
         }
 
         //
