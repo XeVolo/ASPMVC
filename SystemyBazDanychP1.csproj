@@ -230,9 +230,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\MyBD.mdf" />
-    <Content Include="App_Data\MyBD_log.ldf">
-      <DependentUpon>MyBD.mdf</DependentUpon>
+    <Content Include="App_Data\MyDB.mdf" />
+    <Content Include="App_Data\MyDB_log.ldf">
+      <DependentUpon>MyDB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -338,6 +338,7 @@
     <Content Include="Views\SupportChatModels\Details.cshtml" />
     <Content Include="Views\SupportChatModels\Edit.cshtml" />
     <Content Include="Views\SupportChatModels\Index.cshtml" />
+    <Content Include="Views\Manage\ChangeAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />

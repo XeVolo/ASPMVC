@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -101,9 +102,46 @@ namespace SystemyBazDanychP1.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-        //
-        // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber()
+        public ActionResult ChangeAddress()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeAddress(ChangeAddressViewModel model)
+        {
+            ManageMessageId? message;
+            var code = model.ZipCode;
+            var city = model.City;
+            var street = model.StreetAndBuildingNumber;
+            var apNumber = Convert.ToInt32(model.ApartamentNumber);
+
+            string id = HttpContext.User.Identity.Name;
+            var query = db.Users.Where(u => u.UserName == id).FirstOrDefault();
+            int addressId = query.AddressId;
+            var query2 = db.Addresses.Where(u => u.Id == addressId).FirstOrDefault();
+
+            if (query2 != null)
+            {
+                query2.ZipCode = code;
+                query2.City = city;
+                query2.StreetAndBuildingNumber = street;
+                query2.ApartmentNumber = apNumber;
+                db.Entry(query2).State = EntityState.Modified;
+                db.SaveChanges();             
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                message = ManageMessageId.Error;
+            }
+
+
+            return View();
+        }
+            //
+            // GET: /Manage/AddPhoneNumber
+            public ActionResult AddPhoneNumber()
         {
             return View();
         }
@@ -126,7 +164,7 @@ namespace SystemyBazDanychP1.Controllers
                 db.Entry(query).State = EntityState.Modified;
                 db.SaveChanges();
                 message = ManageMessageId.AddPhoneSuccess;
-                return View("Index", new { Message = message });
+                return RedirectToAction("Index", new { Message = message });
             }
             else
             {

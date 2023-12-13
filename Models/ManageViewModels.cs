@@ -57,7 +57,21 @@ namespace SystemyBazDanychP1.Models
         [Compare("NewPassword", ErrorMessage = "Nowe hasło i potwierdzenia hasła nie są zgodne.")]
         public string ConfirmPassword { get; set; }
     }
-
+    public class ChangeAddressViewModel
+    {
+        [Required]
+        [Display(Name = "Kod pocztowy")]
+        public string ZipCode { get; set; }
+        [Required]
+        [Display(Name = "Miasto")]
+        public string City { get; set; }
+        [Required]
+        [Display(Name = "Ulica i numer domu")]
+        public string StreetAndBuildingNumber { get; set; }
+        [Required]
+        [Display(Name = "Numer mieszkania")]
+        public string ApartamentNumber { get; set; }
+    }
     public class AddPhoneNumberViewModel
     {
         [Required]

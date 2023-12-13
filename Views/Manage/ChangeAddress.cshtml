@@ -1,0 +1,50 @@
+﻿@model SystemyBazDanychP1.Models.ChangeAddressViewModel
+@{
+    ViewBag.Title = "Adres";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("ChangeAddress", "Manage", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Zmień adres</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="row">
+            <label for="ZipCode">Kod pocztowy:</label>         
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <label for="City">Miasto:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <label for="StreetAndBuildingNumber">Ulica i numer domu:</label>      
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.StreetAndBuildingNumber, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <label for="ApartamentNumber">Numer Mieszkania:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ApartamentNumber, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-10">
+                <input type="submit" class="btn btn-outline-dark" value="Zmień" />
+            </div>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
