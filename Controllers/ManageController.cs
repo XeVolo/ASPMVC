@@ -126,7 +126,7 @@ namespace SystemyBazDanychP1.Controllers
                 db.Entry(query).State = EntityState.Modified;
                 db.SaveChanges();
                 message = ManageMessageId.AddPhoneSuccess;
-                return View("Index", new { Message = message });
+                return RedirectToAction("Index", new { Message = message });
             }
             else
             {

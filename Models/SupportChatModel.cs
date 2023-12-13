@@ -14,7 +14,6 @@ namespace SystemyBazDanychP1.Models
 		public string AdminId { get; set; }
 
 		public string Conversation { get; set; }
-		public string ApplicationUser_Id { get; set; }
 
         [ForeignKey("ClientId")]
 		public virtual ApplicationUser User { get; set; }

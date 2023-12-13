@@ -23,7 +23,6 @@ namespace SystemyBazDanychP1.Models
 
 		public virtual ProductModel Product { get; set; }
 		public virtual OrderModel Order { get; set;}
-		public virtual ICollection<BasketConnectorModel> BasketConnectors { get; set;}
 
 	}
 }

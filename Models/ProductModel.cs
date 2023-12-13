@@ -18,6 +18,8 @@ namespace SystemyBazDanychP1.Models
         public double Price { get; set; }
 		public bool IsDeleted { get; set; }
 		public virtual CategoryModel Category { get; set; }
-		
+
+		public virtual ICollection<BasketConnectorModel> BasketConnectors { get; set; }
+
 	}
 }
