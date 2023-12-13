@@ -60,6 +60,17 @@ namespace SystemyBazDanychP1.Controllers
 			
 			return View(products2);
 		}
+		[HttpPost]
+		public ActionResult BasketView(int? id)
+		{
+			HttpCookie cookie = Request.Cookies["a"];
+			cookie.Expires = DateTime.Now.AddDays(-1);
+			Response.Cookies.Add(cookie);
+			List<ProductModel> products2 = new List<ProductModel>();
+			return View(products2);
+		}
+
+
 		[Authorize]
 
 
