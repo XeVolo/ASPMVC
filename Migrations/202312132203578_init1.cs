@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class init1 : DbMigration
     {
         public override void Up()
         {
@@ -24,13 +24,13 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        OrderProductId = c.Int(nullable: false),
+                        ProductId = c.Int(nullable: false),
                         BasketId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BasketModels", t => t.BasketId, cascadeDelete: true)
-                .ForeignKey("dbo.OrderProducts", t => t.OrderProductId, cascadeDelete: true)
-                .Index(t => t.OrderProductId)
+                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: true)
+                .Index(t => t.ProductId)
                 .Index(t => t.BasketId);
             
             CreateTable(
@@ -51,7 +51,7 @@
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false),
                         Surrname = c.String(nullable: false),
-                        AddressId = c.Int(nullable: true),
+                        AddressId = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -104,7 +104,7 @@
                         Description = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: false)
+                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.ClientId)
                 .Index(t => t.ClientId)
                 .Index(t => t.SaleAnnouncementId);
@@ -123,7 +123,7 @@
                         Date = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: false)
+                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.SellerId)
                 .Index(t => t.SellerId)
                 .Index(t => t.ProductId);
@@ -139,7 +139,7 @@
                         IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.CategoryModels", t => t.CategoryId, cascadeDelete: false)
+                .ForeignKey("dbo.CategoryModels", t => t.CategoryId, cascadeDelete: true)
                 .Index(t => t.CategoryId);
             
             CreateTable(
@@ -177,8 +177,8 @@
                         TotalPrice = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.OrderModels", t => t.OrderId, cascadeDelete: false)
-                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: false)
+                .ForeignKey("dbo.OrderModels", t => t.OrderId, cascadeDelete: true)
+                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: true)
                 .Index(t => t.ProductId)
                 .Index(t => t.OrderId);
             
@@ -202,13 +202,16 @@
                         Id = c.Int(nullable: false, identity: true),
                         ClientId = c.String(maxLength: 128),
                         AdminId = c.String(maxLength: 128),
-                        Conversation = c.String(),                     
+                        Conversation = c.String(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.AdminId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ClientId)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.ClientId)
-                .Index(t => t.AdminId);
+                .Index(t => t.AdminId)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -230,7 +233,7 @@
                         ExpirationDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: false)
+                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: true)
                 .Index(t => t.SaleAnnouncementId);
             
         }
@@ -247,11 +250,11 @@
             DropForeignKey("dbo.OrderModels", "ClientId", "dbo.AspNetUsers");
             DropForeignKey("dbo.OrderProducts", "ProductId", "dbo.ProductModels");
             DropForeignKey("dbo.OrderProducts", "OrderId", "dbo.OrderModels");
-            DropForeignKey("dbo.BasketConnectorModels", "OrderProductId", "dbo.OrderProducts");
             DropForeignKey("dbo.OpinionModels", "ClientId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SaleAnnouncementModels", "SellerId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SaleAnnouncementModels", "ProductId", "dbo.ProductModels");
             DropForeignKey("dbo.ProductModels", "CategoryId", "dbo.CategoryModels");
+            DropForeignKey("dbo.BasketConnectorModels", "ProductId", "dbo.ProductModels");
             DropForeignKey("dbo.OpinionModels", "SaleAnnouncementId", "dbo.SaleAnnouncementModels");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -278,7 +281,7 @@
             DropIndex("dbo.AspNetUsers", new[] { "AddressId" });
             DropIndex("dbo.BasketModels", new[] { "ClientId" });
             DropIndex("dbo.BasketConnectorModels", new[] { "BasketId" });
-            DropIndex("dbo.BasketConnectorModels", new[] { "OrderProductId" });
+            DropIndex("dbo.BasketConnectorModels", new[] { "ProductId" });
             DropTable("dbo.SpecialOfferModels");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.SupportChatModels");
