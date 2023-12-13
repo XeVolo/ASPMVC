@@ -1,40 +1,25 @@
 ﻿@model SystemyBazDanychP1.Models.SaleAnnouncementModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Ogłoszenie";
 }
 
-<h2>Details</h2>
+<h2>Ogłoszenie</h2>
 
 <div>
-    <h4>SaleAnnouncementModel</h4>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Name)
+            Sprzedawca:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.User.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.User.Surrname)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Product.Price)
+            Cena:
         </dt>
 
         <dd>
@@ -51,7 +36,7 @@
         }
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Opis ogłoszenia:
         </dt>
 
         <dd>
@@ -59,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
+            Ilość:
         </dt>
 
         <dd>
@@ -67,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            Status:
         </dt>
 
         <dd>
@@ -75,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Data wystawienia:
         </dt>
 
         <dd>
@@ -88,13 +73,14 @@
     @using (Html.BeginForm())
     {
         <div class="row">
-            <div class="col-lg-4"><input type="submit" value="Dodaj" class="btn btn-light" /></div>
+            <div class="col-lg-4"><input type="submit" value="Dodaj do koszyka" class="btn btn-light" /></div>
             <div class="col-lg-8"></div>
         </div>
     }
-    @Html.ActionLink("Back to List", "Index")
 
     @Html.ActionLink("Dodaj opinie", "Create", "OpinionModels", new { id = this.Model.Id }, new { @class = "nav-link" })
+
+    @Html.ActionLink("Cofnij do strony głownej", "Index")
 </p>
 <h4>Opinie:</h4>
 <div>

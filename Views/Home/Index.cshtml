@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<SystemyBazDanychP1.Models.SaleAnnouncementModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ogłoszenia";
 }
 
-<h2>Index</h2>
+<h2>Ogłoszenia</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Nazwa ogłoszenia
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.Price)
+            Cena [zł]
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            Data wystawienia
         </th>
 
 
@@ -41,7 +41,7 @@
             </td>
 
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Pokaż ogłoszenie", "Details", new { id = item.Id })
             </td>
         </tr>
     }

@@ -1,24 +1,24 @@
 ﻿@model IEnumerable<SystemyBazDanychP1.Models.SupportChatModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pomoc techniczna";
 }
 
-<h2>Index</h2>
+<h2>Pomoc techniczna</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Rozpocznij nowy czat", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Admin.Name)
+            Administrator
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Name)
+            Użytkownik
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Conversation)
+            Rozmowa
         </th>
         <th></th>
     </tr>
@@ -35,9 +35,7 @@
             @Html.DisplayFor(modelItem => item.Conversation)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Kontynuuj rozmowę", "Edit", new { id=item.Id }) 
         </td>
     </tr>
 }

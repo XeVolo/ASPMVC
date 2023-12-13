@@ -1,6 +1,6 @@
 ﻿@model SystemyBazDanychP1.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Rejestracja";
 }
 
 <main aria-labelledby="title">
@@ -13,20 +13,20 @@
         <hr />
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="row">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+            <label for="Email">E-mail</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="row">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 col-form-label" })
+            <label for="Name">Imię</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             </div>
         </div>
         <div class="row">
-            @Html.LabelFor(m => m.Surrname, new { @class = "col-md-2 col-form-label" })
+            <label for="Surrname">Nazwisko</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Surrname, new { @class = "form-control" })
             </div>
@@ -35,25 +35,25 @@
 
 
         <div class="row">
-            @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 col-form-label" })
+            <label for="ZipCode">Kod pocztowy</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
             </div>
         </div>
         <div class="row">
-            @Html.LabelFor(m => m.City, new { @class = "col-md-2 col-form-label" })
+            <label for="City">Miasto</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
             </div>
         </div>
         <div class="row">
-            @Html.LabelFor(m => m.StreetAndBuildingNumber, new { @class = "col-md-2 col-form-label" })
+            <label for="StreetAndBuildingNumber">Adres</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.StreetAndBuildingNumber, new { @class = "form-control" })
             </div>
         </div>
         <div class="row">
-            @Html.LabelFor(m => m.ApartmentNumber, new { @class = "col-md-2 col-form-label" })
+            <label for="ApartmentNumber">Numer mieszkania</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.ApartmentNumber, new { @class = "form-control" })
             </div>
@@ -69,13 +69,13 @@
 
 
         <div class="row">
-            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+            <label for="Password">Hasło</label>
             <div class="col-md-10">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
             </div>
         </div>
         <div class="row">
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
+            <label for="ConfirmPassword">Potwierdź hasło</label>
             <div class="col-md-10">
                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
             </div>
