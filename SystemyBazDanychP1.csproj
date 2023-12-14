@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressModelsController.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
+    <Compile Include="Controllers\BasketModelsController.cs" />
     <Compile Include="Controllers\CategoryModelsController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -347,6 +348,11 @@
     <Content Include="Views\OrderProducts\Details.cshtml" />
     <Content Include="Views\OrderProducts\Edit.cshtml" />
     <Content Include="Views\OrderProducts\Index.cshtml" />
+    <Content Include="Views\BasketModels\Create.cshtml" />
+    <Content Include="Views\BasketModels\Delete.cshtml" />
+    <Content Include="Views\BasketModels\Details.cshtml" />
+    <Content Include="Views\BasketModels\Edit.cshtml" />
+    <Content Include="Views\BasketModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
