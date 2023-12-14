@@ -17,8 +17,23 @@ namespace SystemyBazDanychP1.Controllers
         // GET: SaleAnnouncementModels
         public ActionResult Index()
         {
-            var saleAnnouncementModels = db.SaleAnnouncements.Include(s => s.Product).Include(s => s.User);
-            return View(saleAnnouncementModels.ToList());
+            IdentityManager im = new IdentityManager();
+            string CiD = HttpContext.User.Identity.Name;
+            var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
+
+            var adminUsers = db.Users
+            .Where(u => u.Roles.Any(ur => ur.RoleId == "d0d956b8-f0a1-4737-83b5-1b5f52c68010"))
+            .ToList();
+            if (adminUsers.Contains(usersId))
+            {
+                var saleAnnouncementModel = db.SaleAnnouncements.Include(s => s.Product).Include(s => s.User);
+                return View(saleAnnouncementModel.ToList());
+            }
+            else
+            {
+                var saleAnnouncementModel = db.SaleAnnouncements.Where(s => s.SellerId == usersId.Id).Include(s => s.Product).Include(s => s.User);
+                return View(saleAnnouncementModel.ToList());
+            }
         }
 
         // GET: SaleAnnouncementModels/Details/5
