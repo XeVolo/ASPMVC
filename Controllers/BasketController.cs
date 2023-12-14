@@ -54,7 +54,7 @@ namespace SystemyBazDanychP1.Controllers
 					if (query2.Count == 1) 
 					{ 
 						 promotion = query2[0].PromotionValue;
-						id3.Price = id3.Price * promotion * 0.01;
+						id3.Price = id3.Price - (id3.Price * promotion * 0.01);
 					}
 				}
 			}
@@ -118,6 +118,10 @@ namespace SystemyBazDanychP1.Controllers
 					products2.Add(prod3);
 				}
             }
+			if (products2.Count < 1)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			int promotion = 0;
 			foreach (var id3 in products2)
 			{
@@ -129,7 +133,7 @@ namespace SystemyBazDanychP1.Controllers
 					if (query2.Count == 1)
 					{
 						promotion = query2[0].PromotionValue;
-						id3.Price = id3.Price * promotion * 0.01;
+						id3.Price = id3.Price-(id3.Price * promotion * 0.01);
 					}
 				}
 			}
@@ -186,7 +190,7 @@ namespace SystemyBazDanychP1.Controllers
 
 
 
-			return View(); ;
+			return View(); 
 		}
 
 	}
