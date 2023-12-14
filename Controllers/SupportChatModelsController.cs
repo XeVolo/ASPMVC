@@ -19,7 +19,13 @@ namespace SystemyBazDanychP1.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var supportChatModels = db.SupportChats.Include(s => s.Admin).Include(s => s.User);
+            IdentityManager im = new IdentityManager();
+            string CiD = HttpContext.User.Identity.Name;
+            var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
+            var adminUsers = db.Users
+            .Where(u => u.Roles.Any(ur => ur.RoleId == "d0d956b8-f0a1-4737-83b5-1b5f52c68010"))
+            .ToList();
+            var supportChatModels = db.SupportChats.Where(s => s.ClientId == usersId.Id).Include(s => s.Admin).Include(s => s.User);
             return View(supportChatModels.ToList());
         }
 
