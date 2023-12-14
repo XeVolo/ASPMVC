@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using SystemyBazDanychP1.Models;
 
@@ -19,7 +21,7 @@ namespace SystemyBazDanychP1.Controllers
 		public ActionResult Index()
 		{
 
-			var saleAnnouncementModels = db.SaleAnnouncements.Include(s => s.Product).Include(s => s.User).ToList();
+			var saleAnnouncementModels = db.SaleAnnouncements.Where(s=>s.Quantity>0).Include(s => s.Product).Include(s => s.User).ToList();
 			return View(saleAnnouncementModels);
 		}
 		
@@ -34,6 +36,7 @@ namespace SystemyBazDanychP1.Controllers
 			{
 				return HttpNotFound();
 			}
+			
 
 			var query1 = db.Opinions.Where(x => x.SaleAnnouncementId == id).ToList();
 			foreach(var i in query1)
@@ -44,8 +47,7 @@ namespace SystemyBazDanychP1.Controllers
 			
             var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == id ).Where(x=>x.ExpirationDate>=DateTime.Today).ToList();
 			ViewBag.Promotion = query2;
-			
-            return View(saleAnnouncementModel);
+			return View(saleAnnouncementModel);
 		}
 		
 		public ActionResult About()
@@ -75,6 +77,7 @@ namespace SystemyBazDanychP1.Controllers
 			{
 				return HttpNotFound();
 			}
+			
 			var productid= Convert.ToString(saleAnnouncementModel.ProductId);
 			HttpCookie cookie;
 

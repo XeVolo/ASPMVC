@@ -99,7 +99,7 @@ namespace SystemyBazDanychP1.Controllers
 
 		public ActionResult Order()
 		{
-            //przycisk w koszyku zamów generuje order model i w nim order products 
+             
             List<int> products = new List<int>();
             List<ProductModel> products2 = new List<ProductModel>();
             if (Request.Cookies["a"] != null)
@@ -156,10 +156,25 @@ namespace SystemyBazDanychP1.Controllers
 					help.TotalPrice = help.Quantity * help.Price;
 				}
 			}
+
+
+
+			foreach(var item3 in orderProducts)
+			{
+				var query6 = db.SaleAnnouncements.Where(x => x.ProductId == item3.ProductId).FirstOrDefault();
+				query6.Quantity = query6.Quantity - item3.Quantity;
+				if (query6.Quantity < 0)
+				{
+					query6.Quantity = 0;
+				}
+				
+				db.Entry(query6).State = EntityState.Modified;
+				db.SaveChanges();
+			}
 			double totalprice = 0;
 			foreach(var item1 in orderProducts)
 			{
-                var orderprod = new OrderProduct { ProductId = item1.ProductId, OrderId = item1.OrderId, Price = item1.Price, Quantity = item1.Quantity, TotalPrice = item1.TotalPrice };
+				var orderprod = new OrderProduct { ProductId = item1.ProductId, OrderId = item1.OrderId, Price = item1.Price, Quantity = item1.Quantity, TotalPrice = item1.TotalPrice };
 				totalprice += item1.TotalPrice;
 				db.OrderProducts.Add(orderprod);
                 db.SaveChanges();
@@ -167,6 +182,8 @@ namespace SystemyBazDanychP1.Controllers
 			order.TotalPrice = totalprice;
 			db.Entry(order).State = EntityState.Modified;
 			db.SaveChanges();
+
+
 
 
 			return View(); ;

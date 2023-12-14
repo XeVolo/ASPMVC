@@ -16,7 +16,7 @@ namespace SystemyBazDanychP1.Models
 		public string Title { get; set; }
 		public string Description { get; set; }
 		[Required]
-		[Range(1, 10000000000)]
+		[Range(0, 10000000000)]
         public int Quantity { get; set; }
 		public int ProductId { get; set; }
 		[Required]

@@ -70,13 +70,14 @@
     </dl>
 </div>
 <p>
+    
     @using (Html.BeginForm())
     {
         <div class="row">
             <div class="col-lg-4"><input type="submit" value="Dodaj do koszyka" class="btn btn-light" /></div>
             <div class="col-lg-8"></div>
         </div>
-    }
+    }    
 
     @Html.ActionLink("Dodaj opinie", "Create", "OpinionModels", new { id = this.Model.Id }, new { @class = "nav-link" })
 
