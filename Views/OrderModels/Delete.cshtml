@@ -1,45 +1,45 @@
-﻿@model SystemyBazDanychP1.Models.ProductModel
+﻿@model SystemyBazDanychP1.Models.OrderModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Usuwanie zamówienia";
 }
 
-<h2>Usuwanie produktu</h2>
+<h2>Usuwanie zamówienia</h2>
 
 <h3>Czy jesteś pewny, że chcesz to usunąć?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Kategoria:
+            Użytkownik:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.User.Name)
         </dd>
 
         <dt>
-            Nazwa:
+            Data:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.DateTime)
         </dd>
 
         <dt>
-            Cena:
+            Suma:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.TotalPrice)
         </dd>
 
         <dt>
-            Czy usunięto?
+            Status:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
+            @Html.DisplayFor(model => model.Status)
         </dd>
 
     </dl>
@@ -48,7 +48,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            <input type="submit" value="Usuń zamówienie" class="btn btn-default" /> |
             @Html.ActionLink("Cofnij", "Index")
         </div>
     }

@@ -1,18 +1,16 @@
-﻿@model IEnumerable<SystemyBazDanychP1.Models.ProductModel>
+﻿@model IEnumerable<SystemyBazDanychP1.Models.OrderProduct>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Zarządzanie produktami</h2>
+<h2>Zamówione produkty</h2>
 
-<p>
-    @Html.ActionLink("Stwórz nowy produkt", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            Nazwa kategorii
+            Identyfikator użytkownika
         </th>
         <th>
             Nazwa produktu
@@ -21,7 +19,10 @@
             Cena
         </th>
         <th>
-            Czy usunięte?
+            Ilość
+        </th>
+        <th>
+            Suma [zł]
         </th>
         <th></th>
     </tr>
@@ -29,16 +30,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
+            @Html.DisplayFor(modelItem => item.Order.ClientId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Product.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
         </td>
         <td>
             @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |

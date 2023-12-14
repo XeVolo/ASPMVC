@@ -1,29 +1,29 @@
-﻿@model SystemyBazDanychP1.Models.ProductModel
+﻿@model SystemyBazDanychP1.Models.OrderProduct
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Usuwanie produktu</h2>
+<h2>Usuwanie zamówionego produktu</h2>
 
 <h3>Czy jesteś pewny, że chcesz to usunąć?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Kategoria:
+            Identyfikator użytkownika:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.Order.ClientId)
         </dd>
 
         <dt>
-            Nazwa:
+            Nazwa produktu:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Product.Name)
         </dd>
 
         <dt>
@@ -35,11 +35,19 @@
         </dd>
 
         <dt>
-            Czy usunięto?
+            Ilość:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            Suma [zł]:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
         </dd>
 
     </dl>

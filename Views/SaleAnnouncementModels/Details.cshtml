@@ -1,13 +1,12 @@
 ﻿@model SystemyBazDanychP1.Models.SaleAnnouncementModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły ogłoszenia";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły ogłoszenia</h2>
 
 <div>
-    <h4>SaleAnnouncementModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -69,6 +68,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Cofnij", "Index")
 </p>

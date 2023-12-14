@@ -189,6 +189,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OpinionModelsController.cs" />
+    <Compile Include="Controllers\OrderModelsController.cs" />
+    <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\ProductModelsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleAnnouncementModelsController.cs" />
@@ -331,6 +333,16 @@
     <Content Include="Views\SupportChatModels\Edit.cshtml" />
     <Content Include="Views\SupportChatModels\Index.cshtml" />
     <Content Include="Views\Manage\ChangeAddress.cshtml" />
+    <Content Include="Views\OrderModels\Create.cshtml" />
+    <Content Include="Views\OrderModels\Delete.cshtml" />
+    <Content Include="Views\OrderModels\Details.cshtml" />
+    <Content Include="Views\OrderModels\Edit.cshtml" />
+    <Content Include="Views\OrderModels\Index.cshtml" />
+    <Content Include="Views\OrderProducts\Create.cshtml" />
+    <Content Include="Views\OrderProducts\Delete.cshtml" />
+    <Content Include="Views\OrderProducts\Details.cshtml" />
+    <Content Include="Views\OrderProducts\Edit.cshtml" />
+    <Content Include="Views\OrderProducts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
