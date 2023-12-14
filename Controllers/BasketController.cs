@@ -13,6 +13,7 @@ namespace SystemyBazDanychP1.Controllers
 	{
 		private ApplicationDbContext db = new ApplicationDbContext();
 		// GET: Basket
+		[Authorize]
 		public ActionResult BasketView()
 		{
 			List<int> products = new List<int>();
@@ -57,7 +58,29 @@ namespace SystemyBazDanychP1.Controllers
 					}
 				}
 			}
-			
+			IdentityManager im = new IdentityManager();
+			string id = HttpContext.User.Identity.Name;
+			var query = db.Users.Where(u => u.UserName == id).FirstOrDefault();
+			var query4= db.Baskets.Where(x=>x.ClientId==query.Id).ToList();
+			BasketModel basket = null;
+			if (query4.Count==0) {
+				 basket = new BasketModel { ClientId = query.Id };
+				db.Baskets.Add(basket);
+				db.SaveChanges();
+			}
+			else
+			{
+				 basket = query4[0];
+			}
+
+			foreach(var item in products2)
+			{
+				var historyprod=new BasketConnectorModel {ProductId= item.Id,BasketId=basket.Id};
+				db.BasketConnectors.Add(historyprod);
+				db.SaveChanges();
+			}
+
+
 			return View(products2);
 		}
 		[HttpPost]
