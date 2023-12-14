@@ -36,6 +36,7 @@ namespace SystemyBazDanychP1.Controllers
 			{
 				return HttpNotFound();
 			}
+			
 
 			var query1 = db.Opinions.Where(x => x.SaleAnnouncementId == id).ToList();
 			foreach(var i in query1)
@@ -76,10 +77,7 @@ namespace SystemyBazDanychP1.Controllers
 			{
 				return HttpNotFound();
 			}
-			if (saleAnnouncementModel.Quantity < 0)
-			{
-				return RedirectToAction("Index");
-			}
+			
 			var productid= Convert.ToString(saleAnnouncementModel.ProductId);
 			HttpCookie cookie;
 

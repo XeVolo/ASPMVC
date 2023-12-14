@@ -163,6 +163,10 @@ namespace SystemyBazDanychP1.Controllers
 			{
 				var query6 = db.SaleAnnouncements.Where(x => x.ProductId == item3.ProductId).FirstOrDefault();
 				query6.Quantity = query6.Quantity - item3.Quantity;
+				if (query6.Quantity < 0)
+				{
+					query6.Quantity = 0;
+				}
 				
 				db.Entry(query6).State = EntityState.Modified;
 				db.SaveChanges();
