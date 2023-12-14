@@ -133,7 +133,7 @@ namespace SystemyBazDanychP1.Controllers
 					if (query2.Count == 1)
 					{
 						promotion = query2[0].PromotionValue;
-						id3.Price = id3.Price * promotion * 0.01;
+						id3.Price = id3.Price-(id3.Price * promotion * 0.01);
 					}
 				}
 			}
