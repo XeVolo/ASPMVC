@@ -16,6 +16,7 @@ namespace SystemyBazDanychP1.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SupportChatModels
+        [Authorize]
         public ActionResult Index()
         {
             var supportChatModels = db.SupportChats.Include(s => s.Admin).Include(s => s.User);
