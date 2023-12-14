@@ -18,7 +18,8 @@
         
         <div class="col-md-10">
             @Html.DisplayFor(model => model.Conversation)
-            @Html.ValidationMessageFor(model => model.Conversation, "", new { @class = "text-danger" })        
+            @Html.Raw(model => model.Conversation)
+            @Html.ValidationMessageFor(model => model.Conversation, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
