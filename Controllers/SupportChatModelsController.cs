@@ -106,7 +106,9 @@ namespace SystemyBazDanychP1.Controllers
         public ActionResult Edit(MessageViewModel messageViewModel)
         {
             var query = db.SupportChats.Find(messageViewModel.Id);
-            query.Conversation += $"\n{messageViewModel.Message}";
+            string eo = messageViewModel.Message;
+
+			query.Conversation += "\n" + eo;
 
             if (ModelState.IsValid)
             {
