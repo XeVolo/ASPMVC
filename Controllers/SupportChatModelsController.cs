@@ -121,10 +121,13 @@ namespace SystemyBazDanychP1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MessageViewModel messageViewModel)
         {
-            var query = db.SupportChats.Find(messageViewModel.Id);
+			IdentityManager im = new IdentityManager();
+			string CiD = HttpContext.User.Identity.Name;
+			var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
+			var query = db.SupportChats.Find(messageViewModel.Id);
             string eo = messageViewModel.Message;
 
-			query.Conversation += "\n" + eo;
+			query.Conversation += "\n" +usersId.Name+":" + eo;
 
             if (ModelState.IsValid)
             {
