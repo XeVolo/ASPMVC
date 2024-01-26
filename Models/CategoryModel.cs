@@ -12,8 +12,6 @@ namespace ASPMVC.Models
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public int? ParentCategoryId { get; set; }
-		public int Left { get; set; }
-		public int Right { get; set; }
 
 		[ForeignKey("ParentCategoryId")]
 		public virtual CategoryModel ParentCategory { get; set; }

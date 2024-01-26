@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASPMVC.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +21,7 @@ namespace ASPMVC.Models
         public int Quantity { get; set; }
 		public int ProductId { get; set; }
 		[Required]
-		public string Status { get; set; }
+		public SaleAnnouncementState State { get; set; }
 		[DataType(DataType.Date)]
 		public DateTime Date {get; set; }
 

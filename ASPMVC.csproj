@@ -212,10 +212,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\AnnouncementViewModel.cs" />
-    <Compile Include="Models\BasketConnectorModel.cs" />
-    <Compile Include="Models\BasketModel.cs" />
     <Compile Include="Models\BasketViewModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\Enums\OrderState.cs" />
+    <Compile Include="Models\Enums\SaleAnnouncementState.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

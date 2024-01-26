@@ -14,10 +14,9 @@ namespace ASPMVC.Models
 		public string Title { get; set; }
 		public string Description { get; set; }
 		[Required]
-		[Range(1, 10000000000)]
 		public int Quantity { get; set; }
 		[Required]
-		public string Status { get; set; }
+		public string State { get; set; }
 		[DataType(DataType.Date)]
 		public DateTime Date { get; set; }
 		[Required]

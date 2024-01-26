@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ASPMVC.Models.Enums;
 
 namespace ASPMVC.Models
 {
@@ -17,7 +18,7 @@ namespace ASPMVC.Models
         public double TotalPrice { get; set; }
 		public string ClientId { get; set; }
 		[Required]
-		public string Status { get; set; }
+		public OrderState State { get; set; }
 		[ForeignKey("ClientId")]
 		public virtual ApplicationUser User { get; set; }
 		public virtual ICollection<OrderProduct> OrderProducts { get; set; }

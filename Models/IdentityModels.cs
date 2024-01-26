@@ -49,7 +49,6 @@ namespace ASPMVC.Models
 
 		}
 		public DbSet<AddressModel> Addresses { get; set; }
-		public DbSet<BasketModel> Baskets { get; set; }
 		public DbSet<CategoryModel> Categories { get; set; }
 		public DbSet<OpinionModel> Opinions { get; set; }
 		public DbSet<OrderModel> Orders { get; set; }
@@ -58,8 +57,6 @@ namespace ASPMVC.Models
 		public DbSet<SaleAnnouncementModel> SaleAnnouncements { get; set; }
 		public DbSet<SpecialOfferModel> SpecialOfferts { get; set; }
 		public DbSet<SupportChatModel> SupportChats { get; set; }
-		public DbSet<BasketConnectorModel> BasketConnectors { get; set; }
-
 
 	}
 	public class IdentityManager
