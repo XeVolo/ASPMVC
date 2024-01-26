@@ -1,7 +1,6 @@
-﻿@model IEnumerable<ASPMVC.Models.ProductModel>
-
+﻿@model IEnumerable<ASPMVC.Models.BasketViewModel>
 @{
-    ViewBag.Title = "Koszyk";
+    ViewBag.Title = "BasketView";
 }
 
 <h2>Koszyk</h2>
@@ -12,6 +11,9 @@
         </th>
         <th>
             Cena
+        </th>
+        <th>
+            Ilość
         </th>
         <th></th>
     </tr>
@@ -26,17 +28,26 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+
+                @Html.ActionLink("Usuń z Koszyka", "BasketViewDeleted", new { id = item.ProductId })
+
             </td>
         </tr>
     }
 
 </table>
-@using (Html.BeginForm())
+@if (TempData["InsufficientStock"] != null)
 {
-    <div class="row">
-        <div class="col-lg-4"><input type="submit" value="Wyczyść koszyk" class="btn btn-light" /></div>
-        <div class="col-lg-8"></div>
+    <div class="alert alert-danger" role="alert">
+        @TempData["InsufficientStock"]
     </div>
 }
-@Html.ActionLink("Zamów", "Order")
+else
+{
+    @Html.ActionLink("Zamów", "Order")
+}
+
 

@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SystemyBazDanychP1</RootNamespace>
-    <AssemblyName>SystemyBazDanychP1</AssemblyName>
+    <RootNamespace>ASPMVC</RootNamespace>
+    <AssemblyName>ASPMVC</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -214,6 +214,7 @@
     <Compile Include="Models\AnnouncementViewModel.cs" />
     <Compile Include="Models\BasketConnectorModel.cs" />
     <Compile Include="Models\BasketModel.cs" />
+    <Compile Include="Models\BasketViewModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
