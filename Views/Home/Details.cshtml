@@ -79,9 +79,9 @@
         </div>
     }    
 
-    @Html.ActionLink("Dodaj opinie", "Create", "OpinionModels", new { id = this.Model.Id }, new { @class = "nav-link" })
+    @Html.ActionLink("Dodaj opinie", "Create", "OpinionModels", new { id = this.Model.Id }, new { @class = "btn btn-light" }) <br />
 
-    @Html.ActionLink("Cofnij do strony głownej", "Index")
+    @Html.ActionLink("Cofnij do strony głownej", "Index", null, new { @class = "btn btn-light"})
 </p>
 <h4>Opinie:</h4>
 <div>
