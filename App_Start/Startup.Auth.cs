@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using SystemyBazDanychP1.Models;
+using ASPMVC.Models;
 
-namespace SystemyBazDanychP1
+namespace ASPMVC
 {
     public partial class Startup
     {

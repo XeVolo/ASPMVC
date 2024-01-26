@@ -1,18 +1,18 @@
-﻿namespace SystemyBazDanychP1.Migrations
+﻿namespace ASPMVC.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SystemyBazDanychP1.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ASPMVC.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(SystemyBazDanychP1.Models.ApplicationDbContext context)
+        protected override void Seed(ASPMVC.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

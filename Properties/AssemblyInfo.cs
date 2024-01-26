@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Informacje ogólne o zestawie zależą od poniższego
 // zestawu atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // związane z zestawem.
-[assembly: AssemblyTitle("SystemyBazDanychP1")]
+[assembly: AssemblyTitle("ASPMVC")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SystemyBazDanychP1")]
+[assembly: AssemblyProduct("ASPMVC")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -5,7 +5,7 @@ using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Web;
 
-namespace SystemyBazDanychP1.Models
+namespace ASPMVC.Models
 {
 	public class SupportChatModel
 	{

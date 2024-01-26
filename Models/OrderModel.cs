@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SystemyBazDanychP1.Models
+namespace ASPMVC.Models
 {
 	public class OrderModel
 	{

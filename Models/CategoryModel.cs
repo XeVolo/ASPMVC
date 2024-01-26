@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace SystemyBazDanychP1.Models
+namespace ASPMVC.Models
 {
 	public class CategoryModel
 	{

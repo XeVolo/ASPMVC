@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(SystemyBazDanychP1.Startup))]
-namespace SystemyBazDanychP1
+[assembly: OwinStartupAttribute(typeof(ASPMVC.Startup))]
+namespace ASPMVC
 {
     public partial class Startup
     {

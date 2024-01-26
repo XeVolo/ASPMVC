@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using SystemyBazDanychP1.Models;
+using ASPMVC.Models;
 
-namespace SystemyBazDanychP1.Controllers
+namespace ASPMVC.Controllers
 {
     [Authorize]
     public class AccountController : Controller

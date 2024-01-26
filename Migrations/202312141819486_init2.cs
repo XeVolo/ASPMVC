@@ -1,4 +1,4 @@
-﻿namespace SystemyBazDanychP1.Migrations
+﻿namespace ASPMVC.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

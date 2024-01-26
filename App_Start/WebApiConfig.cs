@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace SystemyBazDanychP1
+namespace ASPMVC
 {
     public static class WebApiConfig
     {

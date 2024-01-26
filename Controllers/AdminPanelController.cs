@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SystemyBazDanychP1.Controllers
+namespace ASPMVC.Controllers
 {
     public class AdminPanelController : Controller
     {

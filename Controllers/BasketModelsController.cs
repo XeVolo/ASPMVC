@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SystemyBazDanychP1.Models;
+using ASPMVC.Models;
 
-namespace SystemyBazDanychP1.Controllers
+namespace ASPMVC.Controllers
 {
     public class BasketModelsController : Controller
     {
