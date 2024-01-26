@@ -27,5 +27,7 @@ namespace ASPMVC.Models
 		public double Price { get; set; }
 
 		public int CategoryId { get; set; }
-	}
+
+        public virtual ICollection<ImageModel> Images { get; set; }
+    }
 }
