@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using ASPMVC.Models;
+using Newtonsoft.Json;
 
 namespace ASPMVC.Controllers
 {
@@ -67,7 +68,6 @@ namespace ASPMVC.Controllers
 		[HttpPost]
 		public ActionResult Details(int? id,int ?nicxD)
 		{
-			List<int> products=new List<int>();
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -77,39 +77,45 @@ namespace ASPMVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			
-			var productid= Convert.ToString(saleAnnouncementModel.ProductId);
-			HttpCookie cookie;
 
-			if (!string.IsNullOrEmpty(productid))
+			var productid = Convert.ToString(saleAnnouncementModel.ProductId);
+
+			List<KeyValuePair<string, int>> itemsInCart;
+			HttpCookie cookie = Request.Cookies["CartCookie"];
+
+
+			if (cookie != null)
 			{
-				cookie = Request.Cookies["a"];
-				if(cookie == null)
-				{
-					cookie = new HttpCookie("a");
-					cookie.Value = productid;
-					Response.Cookies.Add(cookie);
-				}
-				else
-				{
-					string xd = Request.Cookies["a"].Value; 
-					var idlist = xd.Split(' ');
-					for (int i = 0; i <= idlist.Length-1;i++)
-					{
-						int id1 = Convert.ToInt32(idlist[i]);
-						products.Add(id1);
-					}
-					products.Add(Convert.ToInt32(productid));
-					string resoult = "";
-					foreach (var id2 in products)
-					{
-						resoult = resoult + id2 + " ";
-					}
-					cookie.Value = resoult;
-				}
-				
-				Response.Cookies.Add(cookie);
+				string existingCart = cookie.Value.ToString();
+				itemsInCart = JsonConvert.DeserializeObject<List<KeyValuePair<string, int>>>(existingCart);
 			}
+			else
+			{
+				cookie = new HttpCookie("CartCookie");
+				itemsInCart = new List<KeyValuePair<string, int>>();
+			}
+
+
+			bool productFound = false;
+			for (int i = 0; i < itemsInCart.Count; i++)
+			{
+				if (itemsInCart[i].Key == productid)
+				{
+					itemsInCart[i] = new KeyValuePair<string, int>(itemsInCart[i].Key, itemsInCart[i].Value + 1);
+					productFound = true;
+					break;
+				}
+			}
+
+			if (!productFound)
+			{
+				itemsInCart.Add(new KeyValuePair<string, int>(productid, 1));
+			}
+
+
+			string cartData = JsonConvert.SerializeObject(itemsInCart);
+			cookie.Value = cartData;
+			Response.Cookies.Add(cookie);
 
 			var query1 = db.Opinions.Where(x => x.SaleAnnouncementId == id).ToList();
 			foreach (var i in query1)
