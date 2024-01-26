@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -43,7 +46,8 @@ namespace ASPMVC.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
-        }
+
+		}
 		public DbSet<AddressModel> Addresses { get; set; }
 		public DbSet<BasketModel> Baskets { get; set; }
 		public DbSet<CategoryModel> Categories { get; set; }
@@ -55,6 +59,8 @@ namespace ASPMVC.Models
 		public DbSet<SpecialOfferModel> SpecialOfferts { get; set; }
 		public DbSet<SupportChatModel> SupportChats { get; set; }
 		public DbSet<BasketConnectorModel> BasketConnectors { get; set; }
+
+
 	}
 	public class IdentityManager
 	{
