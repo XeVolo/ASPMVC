@@ -1,16 +1,14 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿using ASPMVC.Models;
+using ASPMVC.Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.Http.Results;
 using System.Web.Mvc;
-using ASPMVC.Models;
-using Newtonsoft.Json;
 
 namespace ASPMVC.Controllers
 {
@@ -32,15 +30,37 @@ namespace ASPMVC.Controllers
             int visitCountFromSession = GetVisitCount();
             ViewBag.VisitCount = visitCountFromSession;
 
-            var saleAnnouncementModels = db.SaleAnnouncements.Where(s=>s.Quantity>0).Include(s => s.Product).Include(s => s.User).ToList();
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                saleAnnouncementModels = db.SaleAnnouncements.Where(s => s.Title.Contains(searchString)).ToList();
-            }
-            return View(saleAnnouncementModels);
+			var saleAnnouncementModels = db.SaleAnnouncements
+				.Where(s => s.Quantity > 0)
+				.Include(s => s.Product)
+				.Where(s => s.Product.IsDeleted == false)
+				.Where(s=>s.State!=SaleAnnouncementState.Suspended)
+				.Include(s => s.User)
+				.Include (s => s.FilePaths)
+				.ToList();
+			return View(saleAnnouncementModels);
 		}
-		
+
+		public ActionResult NewsPromotions()
+		{
+			var query = db.SpecialOfferts.ToList();
+
+			DateTime currentDate = DateTime.Now.AddDays(-10);
+			var saleAnnouncementModels = db.SaleAnnouncements
+				.Where(s => s.Quantity > 0)
+				.Include(s => s.Product)
+				.Where(s => s.Product.IsDeleted == false)
+				.Include(s => s.User)
+				.Where(s => s.State != SaleAnnouncementState.Suspended)
+				.Where(s => s.Date >= currentDate)
+				.Join(query,
+						saleAnnouncement => saleAnnouncement.Id,
+						specialOffer => specialOffer.SaleAnnouncementId,
+						(saleAnnouncement, specialOffer) => saleAnnouncement)
+				.ToList();
+
+			return View(saleAnnouncementModels);
+		}
 		public ActionResult Details(int? id)
 		{
 			if (id == null)
@@ -52,20 +72,20 @@ namespace ASPMVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			
+
 
 			var query1 = db.Opinions.Where(x => x.SaleAnnouncementId == id).ToList();
-			foreach(var i in query1)
+			foreach (var i in query1)
 			{
 				i.ClientId = db.Users.Find(i.ClientId).Name;
 			}
 			ViewBag.Opinions = query1;
-			
-            var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == id ).Where(x=>x.ExpirationDate>=DateTime.Today).ToList();
+
+			var query2 = db.SpecialOfferts.Where(x => x.SaleAnnouncementId == id).Where(x => x.ExpirationDate >= DateTime.Today).ToList();
 			ViewBag.Promotion = query2;
 			return View(saleAnnouncementModel);
 		}
-		
+
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
@@ -81,7 +101,7 @@ namespace ASPMVC.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Details(int? id,int ?nicxD)
+		public ActionResult Details(int? id, int? nicxD)
 		{
 			if (id == null)
 			{

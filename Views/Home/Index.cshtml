@@ -3,20 +3,7 @@
 @{
     ViewBag.Title = "Ogłoszenia";
 }
-<style>
-    .search-form {
-        text-align: center;
-       
-    }
-
-    .search-input {
-        width: 600px; 
-        padding: 8px;
-        margin-right: 10px; 
-        border-radius: 10px;
-        margin: 5px;
-    }
-</style>
+@Html.ActionLink("Nowości i promocje", "NewsPromotions", new { area = "" }, new { @class = "nav-link" })
 
 <p style="text-align: right;">Nasz sklep został odwiedzony już <strong>@ViewBag.VisitCount</strong> razy.</p>
 
@@ -31,6 +18,9 @@
 }
 <table class="table">
     <tr>
+        <th>
+            Zdjęcie
+        </th>
         <th>
             Nazwa ogłoszenia
         </th>
@@ -51,6 +41,20 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @foreach (var item2 in item.FilePaths)
+                {
+                if (!string.IsNullOrEmpty(item2.Path))
+                {
+                    <img src="@item2.Path" alt="Zdjęcie ogłoszenia" />
+                }
+                else
+                {
+                    <span>Brak zdjęcia</span>
+                }
+                    break;
+                }
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>

@@ -184,13 +184,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressModelsController.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
-    <Compile Include="Controllers\CategoryModelsController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\CategoryModelsController.cs" />
+    <Compile Include="Controllers\DeliveryMethodsModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OpinionModelsController.cs" />
     <Compile Include="Controllers\OrderModelsController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
+    <Compile Include="Controllers\PaymentMethodsModelsController.cs" />
     <Compile Include="Controllers\ProductModelsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleAnnouncementModelsController.cs" />
@@ -203,6 +205,14 @@
     <Compile Include="Migrations\202401271535216_init1.designer.cs">
       <DependentUpon>202401271535216_init1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401271747077_init2.cs" />
+    <Compile Include="Migrations\202401271747077_init2.designer.cs">
+      <DependentUpon>202401271747077_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401271809012_init3.cs" />
+    <Compile Include="Migrations\202401271809012_init3.designer.cs">
+      <DependentUpon>202401271809012_init3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressModel.cs" />
@@ -212,6 +222,7 @@
     <Compile Include="Models\DeliveryMethodsModel.cs" />
     <Compile Include="Models\Enums\OrderState.cs" />
     <Compile Include="Models\Enums\SaleAnnouncementState.cs" />
+    <Compile Include="Models\FilePathsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -250,6 +261,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\icons8-laptop-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -307,11 +321,6 @@
     <Content Include="Views\SaleAnnouncementModels\Edit.cshtml" />
     <Content Include="Views\SaleAnnouncementModels\Index.cshtml" />
     <Content Include="Views\SaleAnnouncementModels\Details.cshtml" />
-    <Content Include="Views\CategoryModels\Create.cshtml" />
-    <Content Include="Views\CategoryModels\Delete.cshtml" />
-    <Content Include="Views\CategoryModels\Details.cshtml" />
-    <Content Include="Views\CategoryModels\Edit.cshtml" />
-    <Content Include="Views\CategoryModels\Index.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\Basket\BasketView.cshtml" />
     <Content Include="Views\ProductModels\Create.cshtml" />
@@ -346,6 +355,22 @@
     <Content Include="Views\OrderProducts\Details.cshtml" />
     <Content Include="Views\OrderProducts\Edit.cshtml" />
     <Content Include="Views\OrderProducts\Index.cshtml" />
+    <Content Include="Views\CategoryModels\Create.cshtml" />
+    <Content Include="Views\CategoryModels\Delete.cshtml" />
+    <Content Include="Views\CategoryModels\Details.cshtml" />
+    <Content Include="Views\CategoryModels\Edit.cshtml" />
+    <Content Include="Views\CategoryModels\Index.cshtml" />
+    <Content Include="Views\Home\NewsPromotions.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Create.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Delete.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Details.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Edit.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Index.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Create.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Delete.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Details.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Edit.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
@@ -381,6 +406,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202401271535216_init1.resx">
       <DependentUpon>202401271535216_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401271747077_init2.resx">
+      <DependentUpon>202401271747077_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401271809012_init3.resx">
+      <DependentUpon>202401271809012_init3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

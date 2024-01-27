@@ -25,15 +25,14 @@ namespace ASPMVC.Models
 		[DataType(DataType.Date)]
 		public DateTime Date { get; set; }
 
-        [ForeignKey("SellerId")]
+
+		[ForeignKey("SellerId")]
 		public virtual ApplicationUser User { get; set; }
 		public virtual ProductModel Product { get; set; }
 		public virtual ICollection<OpinionModel> Opinion { get; set; }
+		public virtual ICollection<FilePathsModel> FilePaths { get; set; }
 
-		[NotMapped]
-		public List<HttpPostedFileBase> ImagePaths { get; set; }
-		[NotMapped]
-		public List<HttpPostedFileBase> FilePaths { get; set; }
+	
 
     }
 }

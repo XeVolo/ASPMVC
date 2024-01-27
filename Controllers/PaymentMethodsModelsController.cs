@@ -10,112 +10,107 @@ using ASPMVC.Models;
 
 namespace ASPMVC.Controllers
 {
-    public class CategoryModelsController : Controller
+    public class PaymentMethodsModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: CategoryModels
+        // GET: PaymentMethodsModels
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(c => c.ParentCategory);
-            return View(categories.ToList());
+            return View(db.PaymentMethods.ToList());
         }
 
-        // GET: CategoryModels/Details/5
+        // GET: PaymentMethodsModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryModel categoryModel = db.Categories.Find(id);
-            if (categoryModel == null)
+            PaymentMethodsModel paymentMethodsModel = db.PaymentMethods.Find(id);
+            if (paymentMethodsModel == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryModel);
+            return View(paymentMethodsModel);
         }
 
-        // GET: CategoryModels/Create
+        // GET: PaymentMethodsModels/Create
         public ActionResult Create()
         {
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "Id", "Name");		
-			return View();
+            return View();
         }
 
-        // POST: CategoryModels/Create
+        // POST: PaymentMethodsModels/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ParentCategoryId")] CategoryModel categoryModel)
+        public ActionResult Create([Bind(Include = "Id,Name")] PaymentMethodsModel paymentMethodsModel)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(categoryModel);
+                db.PaymentMethods.Add(paymentMethodsModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "Id", "Name", categoryModel.ParentCategoryId);
-            return View(categoryModel);
+            return View(paymentMethodsModel);
         }
 
-        // GET: CategoryModels/Edit/5
+        // GET: PaymentMethodsModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryModel categoryModel = db.Categories.Find(id);
-            if (categoryModel == null)
+            PaymentMethodsModel paymentMethodsModel = db.PaymentMethods.Find(id);
+            if (paymentMethodsModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "Id", "Name", categoryModel.ParentCategoryId);
-            return View(categoryModel);
+            return View(paymentMethodsModel);
         }
 
-        // POST: CategoryModels/Edit/5
+        // POST: PaymentMethodsModels/Edit/5
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ParentCategoryId")] CategoryModel categoryModel)
+        public ActionResult Edit([Bind(Include = "Id,Name")] PaymentMethodsModel paymentMethodsModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(categoryModel).State = EntityState.Modified;
+                db.Entry(paymentMethodsModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "Id", "Name", categoryModel.ParentCategoryId);
-            return View(categoryModel);
+            return View(paymentMethodsModel);
         }
 
-        // GET: CategoryModels/Delete/5
+        // GET: PaymentMethodsModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryModel categoryModel = db.Categories.Find(id);
-            if (categoryModel == null)
+            PaymentMethodsModel paymentMethodsModel = db.PaymentMethods.Find(id);
+            if (paymentMethodsModel == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryModel);
+            return View(paymentMethodsModel);
         }
 
-        // POST: CategoryModels/Delete/5
+        // POST: PaymentMethodsModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CategoryModel categoryModel = db.Categories.Find(id);
-            db.Categories.Remove(categoryModel);
+            PaymentMethodsModel paymentMethodsModel = db.PaymentMethods.Find(id);
+            db.PaymentMethods.Remove(paymentMethodsModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
