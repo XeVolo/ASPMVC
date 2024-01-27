@@ -28,6 +28,8 @@ namespace ASPMVC.Models
 
 		public int CategoryId { get; set; }
 
-        public virtual ICollection<ImageModel> Images { get; set; }
+        public List<HttpPostedFileBase> ImagePaths { get; set; }
+
+        public List<HttpPostedFileBase> FilePaths { get; set; }
     }
 }

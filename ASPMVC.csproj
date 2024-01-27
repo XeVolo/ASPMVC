@@ -218,7 +218,6 @@
     <Compile Include="Models\Enums\OrderState.cs" />
     <Compile Include="Models\Enums\SaleAnnouncementState.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\OpinionModel.cs" />

@@ -23,14 +23,16 @@ namespace ASPMVC.Models
 		[Required]
 		public SaleAnnouncementState State { get; set; }
 		[DataType(DataType.Date)]
-		public DateTime Date {get; set; }
+		public DateTime Date { get; set; }
 
-
-		[ForeignKey("SellerId")]
+        [ForeignKey("SellerId")]
 		public virtual ApplicationUser User { get; set; }
 		public virtual ProductModel Product { get; set; }
 		public virtual ICollection<OpinionModel> Opinion { get; set; }
-        public virtual ICollection<ImageModel> Images { get; set; }
+
+        public List<HttpPostedFileBase> ImagePaths { get; set; }
+
+        public List<HttpPostedFileBase> FilePaths { get; set; }
 
     }
 }
