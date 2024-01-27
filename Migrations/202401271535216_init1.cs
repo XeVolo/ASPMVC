@@ -20,29 +20,75 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.BasketConnectorModels",
+                "dbo.CategoryModels",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ProductId = c.Int(nullable: false),
-                        BasketId = c.Int(nullable: false),
+                        Name = c.String(),
+                        ParentCategoryId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BasketModels", t => t.BasketId, cascadeDelete: true)
-                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: true)
-                .Index(t => t.ProductId)
-                .Index(t => t.BasketId);
+                .ForeignKey("dbo.CategoryModels", t => t.ParentCategoryId)
+                .Index(t => t.ParentCategoryId);
             
             CreateTable(
-                "dbo.BasketModels",
+                "dbo.DeliveryMethodsModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Price = c.Double(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.OpinionModels",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         ClientId = c.String(maxLength: 128),
+                        SaleAnnouncementId = c.Int(nullable: false),
+                        Description = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: false)
                 .ForeignKey("dbo.AspNetUsers", t => t.ClientId)
-                .Index(t => t.ClientId);
+                .Index(t => t.ClientId)
+                .Index(t => t.SaleAnnouncementId);
+            
+            CreateTable(
+                "dbo.SaleAnnouncementModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SellerId = c.String(maxLength: 128),
+                        Title = c.String(nullable: false, maxLength: 50),
+                        Description = c.String(),
+                        Quantity = c.Int(nullable: false),
+                        ProductId = c.Int(nullable: false),
+                        State = c.Int(nullable: false),
+                        Date = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: false)
+                .ForeignKey("dbo.AspNetUsers", t => t.SellerId)
+                .Index(t => t.SellerId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.ProductModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        CategoryId = c.Int(nullable: false),
+                        Price = c.Double(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CategoryModels", t => t.CategoryId, cascadeDelete: false)
+                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -52,6 +98,7 @@
                         Name = c.String(nullable: false),
                         Surrname = c.String(nullable: false),
                         AddressId = c.Int(nullable: false),
+                        IndividualPromotion = c.Double(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -79,7 +126,7 @@
                         ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -91,65 +138,8 @@
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false)
                 .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.OpinionModels",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        ClientId = c.String(maxLength: 128),
-                        SaleAnnouncementId = c.Int(nullable: false),
-                        Description = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.ClientId)
-                .Index(t => t.ClientId)
-                .Index(t => t.SaleAnnouncementId);
-            
-            CreateTable(
-                "dbo.SaleAnnouncementModels",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        SellerId = c.String(maxLength: 128),
-                        Title = c.String(nullable: false, maxLength: 50),
-                        Description = c.String(),
-                        Quantity = c.Int(nullable: false),
-                        ProductId = c.Int(nullable: false),
-                        Status = c.String(nullable: false),
-                        Date = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.SellerId)
-                .Index(t => t.SellerId)
-                .Index(t => t.ProductId);
-            
-            CreateTable(
-                "dbo.ProductModels",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        CategoryId = c.Int(nullable: false),
-                        Price = c.Double(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.CategoryModels", t => t.CategoryId, cascadeDelete: true)
-                .Index(t => t.CategoryId);
-            
-            CreateTable(
-                "dbo.CategoryModels",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.OrderModels",
@@ -159,7 +149,7 @@
                         DateTime = c.DateTime(nullable: false),
                         TotalPrice = c.Double(nullable: false),
                         ClientId = c.String(maxLength: 128),
-                        Status = c.String(nullable: false),
+                        State = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.ClientId)
@@ -177,8 +167,8 @@
                         TotalPrice = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.OrderModels", t => t.OrderId, cascadeDelete: true)
-                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.OrderModels", t => t.OrderId, cascadeDelete: false)
+                .ForeignKey("dbo.ProductModels", t => t.ProductId, cascadeDelete: false)
                 .Index(t => t.ProductId)
                 .Index(t => t.OrderId);
             
@@ -190,8 +180,8 @@
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: false)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -214,6 +204,15 @@
                 .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
+                "dbo.PaymentMethodsModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -233,7 +232,7 @@
                         ExpirationDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: true)
+                .ForeignKey("dbo.SaleAnnouncementModels", t => t.SaleAnnouncementId, cascadeDelete: false)
                 .Index(t => t.SaleAnnouncementId);
             
         }
@@ -242,24 +241,22 @@
         {
             DropForeignKey("dbo.SpecialOfferModels", "SaleAnnouncementId", "dbo.SaleAnnouncementModels");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.BasketModels", "ClientId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SupportChatModels", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.SupportChatModels", "ClientId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SupportChatModels", "AdminId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SaleAnnouncementModels", "SellerId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.OrderModels", "ClientId", "dbo.AspNetUsers");
             DropForeignKey("dbo.OrderProducts", "ProductId", "dbo.ProductModels");
             DropForeignKey("dbo.OrderProducts", "OrderId", "dbo.OrderModels");
             DropForeignKey("dbo.OpinionModels", "ClientId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.SaleAnnouncementModels", "SellerId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.SaleAnnouncementModels", "ProductId", "dbo.ProductModels");
-            DropForeignKey("dbo.ProductModels", "CategoryId", "dbo.CategoryModels");
-            DropForeignKey("dbo.BasketConnectorModels", "ProductId", "dbo.ProductModels");
-            DropForeignKey("dbo.OpinionModels", "SaleAnnouncementId", "dbo.SaleAnnouncementModels");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "AddressId", "dbo.AddressModels");
-            DropForeignKey("dbo.BasketConnectorModels", "BasketId", "dbo.BasketModels");
+            DropForeignKey("dbo.SaleAnnouncementModels", "ProductId", "dbo.ProductModels");
+            DropForeignKey("dbo.ProductModels", "CategoryId", "dbo.CategoryModels");
+            DropForeignKey("dbo.OpinionModels", "SaleAnnouncementId", "dbo.SaleAnnouncementModels");
+            DropForeignKey("dbo.CategoryModels", "ParentCategoryId", "dbo.CategoryModels");
             DropIndex("dbo.SpecialOfferModels", new[] { "SaleAnnouncementId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.SupportChatModels", new[] { "ApplicationUser_Id" });
@@ -270,33 +267,31 @@
             DropIndex("dbo.OrderProducts", new[] { "OrderId" });
             DropIndex("dbo.OrderProducts", new[] { "ProductId" });
             DropIndex("dbo.OrderModels", new[] { "ClientId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUsers", new[] { "AddressId" });
             DropIndex("dbo.ProductModels", new[] { "CategoryId" });
             DropIndex("dbo.SaleAnnouncementModels", new[] { "ProductId" });
             DropIndex("dbo.SaleAnnouncementModels", new[] { "SellerId" });
             DropIndex("dbo.OpinionModels", new[] { "SaleAnnouncementId" });
             DropIndex("dbo.OpinionModels", new[] { "ClientId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUsers", new[] { "AddressId" });
-            DropIndex("dbo.BasketModels", new[] { "ClientId" });
-            DropIndex("dbo.BasketConnectorModels", new[] { "BasketId" });
-            DropIndex("dbo.BasketConnectorModels", new[] { "ProductId" });
+            DropIndex("dbo.CategoryModels", new[] { "ParentCategoryId" });
             DropTable("dbo.SpecialOfferModels");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.PaymentMethodsModels");
             DropTable("dbo.SupportChatModels");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.OrderProducts");
             DropTable("dbo.OrderModels");
-            DropTable("dbo.CategoryModels");
-            DropTable("dbo.ProductModels");
-            DropTable("dbo.SaleAnnouncementModels");
-            DropTable("dbo.OpinionModels");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.BasketModels");
-            DropTable("dbo.BasketConnectorModels");
+            DropTable("dbo.ProductModels");
+            DropTable("dbo.SaleAnnouncementModels");
+            DropTable("dbo.OpinionModels");
+            DropTable("dbo.DeliveryMethodsModels");
+            DropTable("dbo.CategoryModels");
             DropTable("dbo.AddressModels");
         }
     }

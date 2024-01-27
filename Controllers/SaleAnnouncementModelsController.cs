@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ASPMVC.Models;
+using ASPMVC.Models.Enums;
 
 namespace ASPMVC.Controllers
 {
@@ -78,7 +79,7 @@ namespace ASPMVC.Controllers
 				var product = new ProductModel { Name = model.Name, CategoryId = model.CategoryId, Price = model.Price, IsDeleted = false };
                 db.Products.Add(product);
 				db.SaveChanges();
-				var announcement = new SaleAnnouncementModel { SellerId = model.SellerId, Title = model.Title, Description = model.Description, Quantity = model.Quantity, ProductId = product.Id, Status = "Aktywne", Date = model.Date };
+				var announcement = new SaleAnnouncementModel { SellerId = model.SellerId, Title = model.Title, Description = model.Description, Quantity = model.Quantity, ProductId = product.Id, State=SaleAnnouncementState.Active, Date = model.Date };
                 db.SaleAnnouncements.Add(announcement);
                 db.SaveChanges();
                 return RedirectToAction("Index","Home");

@@ -30,9 +30,10 @@ namespace ASPMVC.Models
 		public virtual ProductModel Product { get; set; }
 		public virtual ICollection<OpinionModel> Opinion { get; set; }
 
-        public List<HttpPostedFileBase> ImagePaths { get; set; }
-
-        public List<HttpPostedFileBase> FilePaths { get; set; }
+		[NotMapped]
+		public List<HttpPostedFileBase> ImagePaths { get; set; }
+		[NotMapped]
+		public List<HttpPostedFileBase> FilePaths { get; set; }
 
     }
 }

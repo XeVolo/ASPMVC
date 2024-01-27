@@ -7,13 +7,13 @@ namespace ASPMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class init2 : IMigrationMetadata
+    public sealed partial class init1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202312141819486_init2"; }
+            get { return "202401271535216_init1"; }
         }
         
         string IMigrationMetadata.Source
