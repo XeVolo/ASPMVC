@@ -3,14 +3,37 @@
 @{
     ViewBag.Title = "Ogłoszenia";
 }
-@Html.ActionLink("Nowości i promocje", "NewsPromotions", new { area = "" }, new { @class = "nav-link" })
+<style>
+    .search-input {
+        width: 600px;
+        padding: 8px;
+        border-radius: 10px;
+        margin: 5px;
+    }
+    .center-both {
+        text-align: center; 
+        vertical-align: middle; 
+    }
+    .center-horizontal {
+        text-align: center;
+    }
+    tr:not(:first-child):hover {
+        background-color: #d1d3d4;
+    }
+    
+</style>
+<div style="display: flex; justify-content: space-between;">
+    <p style="text-align: left; margin: 0;">
+        @Html.ActionLink("Nowości i promocje", "NewsPromotions", new { area = "" }, new { @class = "btn btn-light" })
+    </p>
+    <h2 class="center-horizontal">Nasze produkty</h2>
+    <p style="text-align: right; margin: 0;">
+        Nasz sklep został odwiedzony już <strong>@ViewBag.VisitCount</strong> razy.
+    </p>
+</div>
 
-<p style="text-align: right;">Nasz sklep został odwiedzony już <strong>@ViewBag.VisitCount</strong> razy.</p>
-
-
-@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "search-form" }))
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "center-horizontal" }))
 {
-    <h2>Nasze produkty</h2>
     <p>
         @Html.TextBox("searchString", null, new { placeholder = "Wyszukaj ogłoszenia", @class = "search-input" }) <br />
         <input type="submit" value="Szukaj" class="btn btn-light" />
@@ -18,19 +41,19 @@
 }
 <table class="table">
     <tr>
-        <th>
+        <th class="center-both" >
             Zdjęcie
         </th>
-        <th>
+        <th class="center-both">
             Nazwa ogłoszenia
         </th>
-        <th>
+        <th class="center-both">
             Cena [zł]
         </th>
-        <th>
+        <th class="center-both">
             Status
         </th>
-        <th>
+        <th class="center-both">
             Data wystawienia
         </th>
 
@@ -40,36 +63,32 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+        <tr onclick="location.href='@Url.Action("Details", new { id = item.Id })';" style="cursor:pointer;">
+            <td class="center-both">
                 @foreach (var item2 in item.FilePaths)
                 {
-                if (!string.IsNullOrEmpty(item2.Path))
-                {
-                    <img src="@item2.Path" alt="Zdjęcie ogłoszenia" />
-                }
-                else
-                {
-                    <span>Brak zdjęcia</span>
-                }
+                    if (!string.IsNullOrEmpty(item2.Path))
+                    {
+                        <img src="@item2.Path" alt="Zdjęcie ogłoszenia" style="max-width: 300px; max-height: 300px; min-width: 150px; min-height: 150px" />
+                    }
+                    else
+                    {
+                        <span>Brak zdjęcia</span>
+                    }
                     break;
                 }
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.Product.Price)
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.State)
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.Date)
-            </td>
-
-            <td>
-                @Html.ActionLink("Pokaż ogłoszenie", "Details", new { id = item.Id })
             </td>
         </tr>
     }

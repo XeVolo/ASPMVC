@@ -38,7 +38,13 @@ namespace ASPMVC.Controllers
 				.Include(s => s.User)
 				.Include (s => s.FilePaths)
 				.ToList();
-			return View(saleAnnouncementModels);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                saleAnnouncementModels = db.SaleAnnouncements.Where(s => s.Title.Contains(searchString)).ToList();
+            }
+
+            return View(saleAnnouncementModels);
 		}
 
 		public ActionResult NewsPromotions()
