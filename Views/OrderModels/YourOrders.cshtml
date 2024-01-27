@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ASPMVC.Models.OrderModel>
+@{
+    ViewBag.Title = "YourOrders";
+}
+
+<h2>Twoje zamówienia</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Data
+        </th>
+        <th>
+            Suma [zł]
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>           
+        </tr>
+    }
+    <p>
+        @Html.ActionLink("Cofnij", "Index", "Manage")
+    </p>
+</table>

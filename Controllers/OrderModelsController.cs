@@ -21,6 +21,19 @@ namespace ASPMVC.Controllers
             return View(orderModels.ToList());
         }
 
+        public ActionResult YourOrders()
+        {
+            IdentityManager im = new IdentityManager();
+            string CiD = HttpContext.User.Identity.Name;
+
+            // Assuming db.Users is your user table
+            var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
+
+            // Assuming db.Orders is your orders table
+            var orderModels = db.Orders.Where(o => o.User.Id == usersId.Id).ToList();
+
+            return View(orderModels);
+        }
         // GET: OrderModels/Details/5
         public ActionResult Details(int? id)
         {

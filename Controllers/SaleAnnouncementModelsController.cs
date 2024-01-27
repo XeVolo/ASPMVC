@@ -24,7 +24,7 @@ namespace ASPMVC.Controllers
             var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
 
             var adminUsers = db.Users
-            .Where(u => u.Roles.Any(ur => ur.RoleId == "d0d956b8-f0a1-4737-83b5-1b5f52c68010"))
+            .Where(u => u.Roles.Any(ur => ur.RoleId == "eaed33bd-a108-41f5-94b9-0cb03db01edd"))
             .ToList();
             if (adminUsers.Contains(usersId))
             {
@@ -134,7 +134,7 @@ namespace ASPMVC.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,SellerId,Title,Description,Quantity,ProductId,Status,Date")] SaleAnnouncementModel saleAnnouncementModel)
+        public ActionResult Edit([Bind(Include = "Id,SellerId,Title,Description,Quantity,ProductId,State,Date")] SaleAnnouncementModel saleAnnouncementModel)
         {
             if (ModelState.IsValid)
             {

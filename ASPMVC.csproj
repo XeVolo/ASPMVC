@@ -371,6 +371,7 @@
     <Content Include="Views\PaymentMethodsModels\Details.cshtml" />
     <Content Include="Views\PaymentMethodsModels\Edit.cshtml" />
     <Content Include="Views\PaymentMethodsModels\Index.cshtml" />
+    <Content Include="Views\OrderModels\YourOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
