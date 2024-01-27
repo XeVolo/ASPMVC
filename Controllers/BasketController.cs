@@ -197,6 +197,7 @@ namespace ASPMVC.Controllers
 				db.OrderProducts.Add(orderprod);
 				db.SaveChanges();
 			}
+			totalprice = totalprice - (totalprice * query[0].IndividualPromotion * 0.01);
 			order.TotalPrice = totalprice;
 			db.Entry(order).State = EntityState.Modified;
 			db.SaveChanges();

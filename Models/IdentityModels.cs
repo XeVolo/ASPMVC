@@ -66,7 +66,6 @@ namespace ASPMVC.Models
 		public DbSet<DeliveryMethodsModel> DeliveryMethods { get; set; }
 
 		public DbSet<FilePathsModel> FilePaths { get; set; }
-
 	}
 	public class IdentityManager
 	{
