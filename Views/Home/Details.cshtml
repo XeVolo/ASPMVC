@@ -1,15 +1,28 @@
 ﻿@model ASPMVC.Models.SaleAnnouncementModel
 
 @{
-    ViewBag.Title = "Ogłoszenie";
+    ViewBag.Title = "Produkt";
 }
 
-<h2>Ogłoszenie</h2>
+<h2>Produkt</h2>
 
 <div>
     <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @foreach (var item2 in Model.FilePaths)
+            {
+                if (!string.IsNullOrEmpty(item2.Path))
+                {
+                    <img src="/@item2.Path" alt="Zdjęcie ogłoszenia" style="max-width: 300px; max-height: 300px; min-width: 150px; min-height: 150px; margin-right: 10px; display: inline-block;" />
+                }
+                else
+                {
+                    <span>Brak zdjęcia</span>
+                }
+            }
+        </dt>
         <dt>
             Sprzedawca:
         </dt>
