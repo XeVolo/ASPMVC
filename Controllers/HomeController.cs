@@ -19,11 +19,26 @@ namespace ASPMVC.Controllers
 		private ApplicationDbContext db = new ApplicationDbContext();
 
 		// GET: SaleAnnouncementModels
-		public ActionResult Index()
+		public ActionResult Index(string searchString)
 		{
+			//Session["RequestID"] = Guid.NewGuid().ToString();
+			//IncreaseVisitCount();
+            if (Session["RequestID"] == null) 
+            {
+                string requestID = Guid.NewGuid().ToString(); //nadawanie nowego identyfikatora sesji
+                Session["RequestID"] = requestID;
+                IncreaseVisitCount();
+            }
+            int visitCountFromSession = GetVisitCount();
+            ViewBag.VisitCount = visitCountFromSession;
 
-			var saleAnnouncementModels = db.SaleAnnouncements.Where(s=>s.Quantity>0).Include(s => s.Product).Include(s => s.User).ToList();
-			return View(saleAnnouncementModels);
+            var saleAnnouncementModels = db.SaleAnnouncements.Where(s=>s.Quantity>0).Include(s => s.Product).Include(s => s.User).ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                saleAnnouncementModels = db.SaleAnnouncements.Where(s => s.Title.Contains(searchString)).ToList();
+            }
+            return View(saleAnnouncementModels);
 		}
 		
 		public ActionResult Details(int? id)
@@ -129,5 +144,24 @@ namespace ASPMVC.Controllers
 
 			return View(saleAnnouncementModel);
 		}
-	}
+        private void IncreaseVisitCount()
+        {
+            int visitCount = GetVisitCount();
+            visitCount++;
+            SetVisitCount(visitCount);
+        }
+
+        private int GetVisitCount()
+        {
+            if (HttpContext.Cache["VisitCount"] == null)
+                HttpContext.Cache["VisitCount"] = 0;
+
+            return (int)HttpContext.Cache["VisitCount"];
+        }
+
+        private void SetVisitCount(int visitCount)
+        {
+            HttpContext.Cache["VisitCount"] = visitCount;
+        }
+    }
 }

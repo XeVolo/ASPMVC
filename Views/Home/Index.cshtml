@@ -3,8 +3,32 @@
 @{
     ViewBag.Title = "Ogłoszenia";
 }
+<style>
+    .search-form {
+        text-align: center;
+       
+    }
 
-<h2>Ogłoszenia</h2>
+    .search-input {
+        width: 600px; 
+        padding: 8px;
+        margin-right: 10px; 
+        border-radius: 10px;
+        margin: 5px;
+    }
+</style>
+
+<p style="text-align: right;">Nasz sklep został odwiedzony już <strong>@ViewBag.VisitCount</strong> razy.</p>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "search-form" }))
+{
+    <h2>Nasze produkty</h2>
+    <p>
+        @Html.TextBox("searchString", null, new { placeholder = "Wyszukaj ogłoszenia", @class = "search-input" }) <br />
+        <input type="submit" value="Szukaj" class="btn btn-light" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
