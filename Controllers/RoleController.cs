@@ -25,7 +25,7 @@ namespace ASPMVC.Controllers
 		{
 			IdentityManager im = new IdentityManager();
 
-			im.AddUserToRoleByUsername("", "Admin");
+			im.AddUserToRoleByUsername("adamnowak@gmail.com", "Admin");
 			
 
 			return "OK";
