@@ -36,20 +36,29 @@ namespace ASPMVC.Controllers
 			var query = db.SpecialOfferts.ToList();
 
 			DateTime currentDate = DateTime.Now.AddDays(-10);
-			var saleAnnouncementModels = db.SaleAnnouncements
+			var saleAnnouncementModels = db.SaleAnnouncements				
 				.Where(s => s.Quantity > 0)
 				.Include(s => s.Product)
 				.Where(s => s.Product.IsDeleted == false)
 				.Include(s => s.User)
 				.Where(s => s.State != SaleAnnouncementState.Suspended)
 				.Where(s => s.Date >= currentDate)
-				.Join(query,
-						saleAnnouncement => saleAnnouncement.Id,
-						specialOffer => specialOffer.SaleAnnouncementId,
-						(saleAnnouncement, specialOffer) => saleAnnouncement)
+				.ToList();
+			
+			
+			var specialoffer = db.SpecialOfferts
+				.Select(s => s.SaleAnnouncement)
+				.Where(s => s.Quantity > 0)
+				.Include(s => s.Product)
+				.Where(s => s.Product.IsDeleted == false)
+				.Include(s => s.User)
+				.Where(s => s.State != SaleAnnouncementState.Suspended)
+				.Where(s => s.Date >= currentDate)
 				.ToList();
 
-			return View(saleAnnouncementModels);
+			var combinedList = saleAnnouncementModels.Union(specialoffer).ToList();
+
+			return View(combinedList);
 		}
 		public ActionResult Details(int? id)
 		{
