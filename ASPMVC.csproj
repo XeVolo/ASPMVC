@@ -214,6 +214,7 @@
     <Compile Include="Models\AnnouncementViewModel.cs" />
     <Compile Include="Models\BasketViewModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\DeliveryMethodsModel.cs" />
     <Compile Include="Models\Enums\OrderState.cs" />
     <Compile Include="Models\Enums\SaleAnnouncementState.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Models\OpinionModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderProduct.cs" />
+    <Compile Include="Models\PaymentMethodsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SaleAnnouncementModel.cs" />
     <Compile Include="Models\SpecialOfferModel.cs" />

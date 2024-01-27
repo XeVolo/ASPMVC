@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.Reflection.Emit;
 using System.Security.Claims;
@@ -27,6 +29,9 @@ namespace ASPMVC.Models
 		public string Surrname { get; set; }
 
 		public int AddressId { get; set; }
+
+		[DefaultValue(0)]
+		public double IndividualPromotion {  get; set; }
 
 		public virtual AddressModel Address { get; set; }
 		public virtual ICollection<OrderModel> OrderModels { get; set; }
@@ -57,6 +62,8 @@ namespace ASPMVC.Models
 		public DbSet<SaleAnnouncementModel> SaleAnnouncements { get; set; }
 		public DbSet<SpecialOfferModel> SpecialOfferts { get; set; }
 		public DbSet<SupportChatModel> SupportChats { get; set; }
+		public DbSet<PaymentMethodsModel> PaymentMethods { get; set; }
+		public DbSet<DeliveryMethodsModel> DeliveryMethods { get; set; }
 
 	}
 	public class IdentityManager
