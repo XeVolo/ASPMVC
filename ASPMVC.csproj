@@ -184,13 +184,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressModelsController.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
-    <Compile Include="Controllers\CategoryModelsController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\CategoryModelsController.cs" />
+    <Compile Include="Controllers\DeliveryMethodsModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OpinionModelsController.cs" />
     <Compile Include="Controllers\OrderModelsController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
+    <Compile Include="Controllers\PaymentMethodsModelsController.cs" />
     <Compile Include="Controllers\ProductModelsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleAnnouncementModelsController.cs" />
@@ -307,11 +309,6 @@
     <Content Include="Views\SaleAnnouncementModels\Edit.cshtml" />
     <Content Include="Views\SaleAnnouncementModels\Index.cshtml" />
     <Content Include="Views\SaleAnnouncementModels\Details.cshtml" />
-    <Content Include="Views\CategoryModels\Create.cshtml" />
-    <Content Include="Views\CategoryModels\Delete.cshtml" />
-    <Content Include="Views\CategoryModels\Details.cshtml" />
-    <Content Include="Views\CategoryModels\Edit.cshtml" />
-    <Content Include="Views\CategoryModels\Index.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\Basket\BasketView.cshtml" />
     <Content Include="Views\ProductModels\Create.cshtml" />
@@ -346,6 +343,22 @@
     <Content Include="Views\OrderProducts\Details.cshtml" />
     <Content Include="Views\OrderProducts\Edit.cshtml" />
     <Content Include="Views\OrderProducts\Index.cshtml" />
+    <Content Include="Views\CategoryModels\Create.cshtml" />
+    <Content Include="Views\CategoryModels\Delete.cshtml" />
+    <Content Include="Views\CategoryModels\Details.cshtml" />
+    <Content Include="Views\CategoryModels\Edit.cshtml" />
+    <Content Include="Views\CategoryModels\Index.cshtml" />
+    <Content Include="Views\Home\NewsPromotions.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Create.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Delete.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Details.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Edit.cshtml" />
+    <Content Include="Views\DeliveryMethodsModels\Index.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Create.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Delete.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Details.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Edit.cshtml" />
+    <Content Include="Views\PaymentMethodsModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
