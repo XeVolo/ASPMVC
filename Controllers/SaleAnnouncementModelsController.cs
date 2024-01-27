@@ -72,7 +72,7 @@ namespace ASPMVC.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AnnouncementViewModel model, HttpPostedFileBase file)
+        public ActionResult Create(AnnouncementViewModel model, List<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
@@ -85,19 +85,26 @@ namespace ASPMVC.Controllers
                 db.SaleAnnouncements.Add(announcement);
                 db.SaveChanges();
 
-				if (file != null && file.ContentLength > 0)
-				{
-					string fileName = Path.GetFileName(file.FileName);
-					string filePath = Path.Combine(Server.MapPath("~/Images"), fileName);
-					file.SaveAs(filePath);
+                if (files != null && files.Any())
+                {
+                    foreach (var file in files)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            string fileName = Path.GetFileName(file.FileName);
+                            string filePath = Path.Combine(Server.MapPath("~/Images"), fileName);
+                            file.SaveAs(filePath);
 
-					var ImageFilePath = "Images/" + fileName;
+                            var imageFilePath = "Images/" + fileName;
 
-                    var file1 = new FilePathsModel { Path = ImageFilePath, SaleAnnouncementId = announcement.Id };
-                    db.FilePaths.Add(file1);
+                            var fileEntity = new FilePathsModel { Path = imageFilePath, SaleAnnouncementId = announcement.Id };
+                            db.FilePaths.Add(fileEntity);
+                        }
+                    }
+
                     db.SaveChanges();
-				}
-				return RedirectToAction("Index","Home");
+                }
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");

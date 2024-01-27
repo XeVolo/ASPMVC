@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Zarządzanie ogłoszeniami</h2>
+<h2>Zarządzaj produktami</h2>
 
 
 <table class="table">
@@ -13,10 +13,7 @@
             Nazwa produktu
         </th>
         <th>
-            Nazwa sprzedawcy
-        </th>
-        <th>
-            Tytuł ogłoszenia
+            Nazwa produktu
         </th>
         <th>
             Opis
@@ -37,9 +34,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Product.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
