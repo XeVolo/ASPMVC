@@ -205,6 +205,14 @@
     <Compile Include="Migrations\202401271535216_init1.designer.cs">
       <DependentUpon>202401271535216_init1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401271747077_init2.cs" />
+    <Compile Include="Migrations\202401271747077_init2.designer.cs">
+      <DependentUpon>202401271747077_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401271809012_init3.cs" />
+    <Compile Include="Migrations\202401271809012_init3.designer.cs">
+      <DependentUpon>202401271809012_init3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressModel.cs" />
@@ -214,6 +222,7 @@
     <Compile Include="Models\DeliveryMethodsModel.cs" />
     <Compile Include="Models\Enums\OrderState.cs" />
     <Compile Include="Models\Enums\SaleAnnouncementState.cs" />
+    <Compile Include="Models\FilePathsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -252,6 +261,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\icons8-laptop-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -394,6 +406,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202401271535216_init1.resx">
       <DependentUpon>202401271535216_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401271747077_init2.resx">
+      <DependentUpon>202401271747077_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401271809012_init3.resx">
+      <DependentUpon>202401271809012_init3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

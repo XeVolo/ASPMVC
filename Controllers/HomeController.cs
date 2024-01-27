@@ -26,6 +26,7 @@ namespace ASPMVC.Controllers
 				.Where(s => s.Product.IsDeleted == false)
 				.Where(s=>s.State!=SaleAnnouncementState.Suspended)
 				.Include(s => s.User)
+				.Include (s => s.FilePaths)
 				.ToList();
 			return View(saleAnnouncementModels);
 		}

@@ -9,6 +9,9 @@
 <table class="table">
     <tr>
         <th>
+            Zdjęcie
+        </th>
+        <th>
             Nazwa ogłoszenia
         </th>
         <th>
@@ -28,6 +31,20 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @foreach (var item2 in item.FilePaths)
+                {
+                if (!string.IsNullOrEmpty(item2.Path))
+                {
+                    <img src="@item2.Path" alt="Zdjęcie ogłoszenia" />
+                }
+                else
+                {
+                    <span>Brak zdjęcia</span>
+                }
+                    break;
+                }
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -71,18 +72,32 @@ namespace ASPMVC.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AnnouncementViewModel model)
+        public ActionResult Create(AnnouncementViewModel model, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                
+
+				
 				var product = new ProductModel { Name = model.Name, CategoryId = model.CategoryId, Price = model.Price, IsDeleted = false };
                 db.Products.Add(product);
 				db.SaveChanges();
-				var announcement = new SaleAnnouncementModel { SellerId = model.SellerId, Title = model.Title, Description = model.Description, Quantity = model.Quantity, ProductId = product.Id, State=SaleAnnouncementState.Active, Date = model.Date };
+				var announcement = new SaleAnnouncementModel { SellerId = model.SellerId, Title = model.Title, Description = model.Description, Quantity = model.Quantity, ProductId = product.Id, State=SaleAnnouncementState.Active, Date = model.Date};
                 db.SaleAnnouncements.Add(announcement);
                 db.SaveChanges();
-                return RedirectToAction("Index","Home");
+
+				if (file != null && file.ContentLength > 0)
+				{
+					string fileName = Path.GetFileName(file.FileName);
+					string filePath = Path.Combine(Server.MapPath("~/Images"), fileName);
+					file.SaveAs(filePath);
+
+					var ImageFilePath = "Images/" + fileName;
+
+                    var file1 = new FilePathsModel { Path = ImageFilePath, SaleAnnouncementId = announcement.Id };
+                    db.FilePaths.Add(file1);
+                    db.SaveChanges();
+				}
+				return RedirectToAction("Index","Home");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");

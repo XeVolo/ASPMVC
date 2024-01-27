@@ -15,8 +15,7 @@ namespace ASPMVC.Models
 		public string Description { get; set; }
 		[Required]
 		public int Quantity { get; set; }
-		[Required]
-		public string State { get; set; }
+
 		[DataType(DataType.Date)]
 		public DateTime Date { get; set; }
 		[Required]
@@ -28,8 +27,6 @@ namespace ASPMVC.Models
 
 		public int CategoryId { get; set; }
 
-        public List<HttpPostedFileBase> ImagePaths { get; set; }
-
-        public List<HttpPostedFileBase> FilePaths { get; set; }
-    }
+		public string ImageFilePath { get; set; }
+	}
 }
