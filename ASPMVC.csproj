@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressModelsController.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\CategoryModelsController.cs" />
     <Compile Include="Controllers\DeliveryMethodsModelsController.cs" />
@@ -371,6 +372,10 @@
     <Content Include="Views\PaymentMethodsModels\Details.cshtml" />
     <Content Include="Views\PaymentMethodsModels\Edit.cshtml" />
     <Content Include="Views\PaymentMethodsModels\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
