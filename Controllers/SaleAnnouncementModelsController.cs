@@ -24,7 +24,7 @@ namespace ASPMVC.Controllers
             var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
 
             var adminUsers = db.Users
-            .Where(u => u.Roles.Any(ur => ur.RoleId == "c436e8c7-436a-428c-8cc4-f19c8fa6361b"))
+            .Where(u => u.Roles.Any(ur => ur.RoleId == "eaed33bd-a108-41f5-94b9-0cb03db01edd"))
             .ToList();
             if (adminUsers.Contains(usersId))
             {

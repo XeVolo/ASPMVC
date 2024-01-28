@@ -24,7 +24,7 @@ namespace ASPMVC.Controllers
             var usersId = db.Users.Where(u => u.UserName == CiD).FirstOrDefault();
 
             var adminUsers = db.Users
-            .Where(u => u.Roles.Any(ur => ur.RoleId == "d0d956b8-f0a1-4737-83b5-1b5f52c68010"))
+            .Where(u => u.Roles.Any(ur => ur.RoleId == "eaed33bd-a108-41f5-94b9-0cb03db01edd"))
             .ToList();
             if (adminUsers.Contains(usersId))
             {
@@ -61,7 +61,7 @@ namespace ASPMVC.Controllers
             string CiD = HttpContext.User.Identity.Name;
             var usersId = db.Users.Where(u => u.UserName == CiD).ToList();
             var adminUsers = db.Users
-            .Where(u => u.Roles.Any(ur => ur.RoleId == "d0d956b8-f0a1-4737-83b5-1b5f52c68010"))
+            .Where(u => u.Roles.Any(ur => ur.RoleId == "eaed33bd-a108-41f5-94b9-0cb03db01edd"))
             .ToList();
             string s = usersId[0].Id;
             var query = db.SupportChats.Where(a => a.ClientId.Equals(s)).ToList();

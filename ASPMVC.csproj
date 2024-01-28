@@ -377,6 +377,7 @@
     <Content Include="Views\PaymentMethodsModels\Details.cshtml" />
     <Content Include="Views\PaymentMethodsModels\Edit.cshtml" />
     <Content Include="Views\PaymentMethodsModels\Index.cshtml" />
+    <Content Include="Views\OrderModels\YourOrders.cshtml" />
     <Content Include="Views\ApplicationUsers\Delete.cshtml" />
     <Content Include="Views\ApplicationUsers\Details.cshtml" />
     <Content Include="Views\ApplicationUsers\Edit.cshtml" />

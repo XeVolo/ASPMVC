@@ -3,44 +3,76 @@
 @{
     ViewBag.Title = "Ogłoszenia";
 }
-<h2>Nowości i promocje</h2>
+<style>
+    .search-input {
+        width: 600px;
+        padding: 8px;
+        border-radius: 10px;
+        margin: 5px;
+    }
+
+    .center-both {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .center-horizontal {
+        text-align: center;
+    }
+
+    tr:not(:first-child):hover {
+        background-color: #d1d3d4;
+    }
+</style>
+<h2 class="center-horizontal">Nowości i promocje</h2>
+
 <table class="table">
     <tr>
-        <th>
-            Nazwa ogłoszenia
+        <th class="center-both">
+            Zdjęcie
         </th>
-        <th>
+        <th class="center-both">
+            Nazwa produktu
+        </th>
+        <th class="center-both">
             Cena [zł]
         </th>
-        <th>
+        <th class="center-both">
             Status
         </th>
-        <th>
+        <th class="center-both">
             Data wystawienia
         </th>
-
-
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+        <tr onclick="location.href='@Url.Action("Details", new { id = item.Id })';" style="cursor:pointer;">
+            <td class="center-both">
+                @foreach (var item2 in item.FilePaths)
+                {
+                    if (!string.IsNullOrEmpty(item2.Path))
+                    {
+                        <img src="/@item2.Path" alt="Zdjęcie ogłoszenia" style="max-width: 200px; max-height: 200px; min-width: 150px; min-height: 150px" />
+                    }
+                    else
+                    {
+                        <span>Brak zdjęcia</span>
+                    }
+                    break;
+                }
+            </td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.Product.Price)
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.State)
             </td>
-            <td>
+            <td class="center-horizontal">
                 @Html.DisplayFor(modelItem => item.Date)
-            </td>
-
-            <td>
-                @Html.ActionLink("Pokaż ogłoszenie", "Details", new { id = item.Id })
             </td>
         </tr>
     }
