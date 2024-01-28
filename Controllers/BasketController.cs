@@ -107,9 +107,16 @@ namespace ASPMVC.Controllers
 			return RedirectToAction("BasketView");
 		}
 
-
-		[Authorize]
 		public ActionResult Order()
+		{
+			ViewBag.PaymentId = new SelectList(db.PaymentMethods, "Id", "Name");
+			ViewBag.DeliveryId = new SelectList(db.DeliveryMethods, "Id", "Name");
+			return View();
+		}
+
+		[HttpPost]
+		[Authorize]
+		public ActionResult Order([Bind(Include = "PaymentId,DeliveryId")] OrderViewModel orderView)
 		{
 
 			List<ProductModel> products2 = new List<ProductModel>();
@@ -155,7 +162,7 @@ namespace ASPMVC.Controllers
 			IdentityManager im = new IdentityManager();
 			string id = HttpContext.User.Identity.Name;
 			var query = db.Users.Where(u => u.UserName == id).ToList();
-			var order = new OrderModel { DateTime = DateTime.Today, TotalPrice = 0, ClientId = query[0].Id, State=OrderState.InProgress };
+			var order = new OrderModel { DateTime = DateTime.Today, TotalPrice = 0, ClientId = query[0].Id, State=OrderState.InProgress, DeliveryMethodId=orderView.DeliveryId, PaymentMethodId=orderView.PaymentId  };
 			db.Orders.Add(order);
 			db.SaveChanges();
 			List<OrderProduct> orderProducts = new List<OrderProduct>();
@@ -205,6 +212,10 @@ namespace ASPMVC.Controllers
 			cookie = Request.Cookies["CartCookie"];
 			cookie.Expires = DateTime.Now.AddDays(-1);
 			Response.Cookies.Add(cookie);
+			return RedirectToAction("Placed");
+		}
+		public ActionResult Placed()
+		{
 			return View();
 		}
 

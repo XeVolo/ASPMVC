@@ -214,6 +214,10 @@
     <Compile Include="Migrations\202401271809012_init3.designer.cs">
       <DependentUpon>202401271809012_init3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401272351487_init4.cs" />
+    <Compile Include="Migrations\202401272351487_init4.designer.cs">
+      <DependentUpon>202401272351487_init4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressModel.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="Models\OpinionModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderProduct.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PaymentMethodsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SaleAnnouncementModel.cs" />
@@ -376,6 +381,7 @@
     <Content Include="Views\ApplicationUsers\Details.cshtml" />
     <Content Include="Views\ApplicationUsers\Edit.cshtml" />
     <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\Basket\Placed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddressModels\" />
@@ -417,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401271809012_init3.resx">
       <DependentUpon>202401271809012_init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401272351487_init4.resx">
+      <DependentUpon>202401272351487_init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
