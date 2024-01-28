@@ -60,19 +60,19 @@ namespace ASPMVC.Controllers
 				.Where(s => s.State != SaleAnnouncementState.Suspended)
 				.Where(s => s.Date >= currentDate)
 				.ToList();
-			
-			
-			var specialoffer = db.SpecialOfferts
+
+
+            var specialoffer = db.SpecialOfferts
+				.Where(s => s.ExpirationDate >= DateTime.Today)
 				.Select(s => s.SaleAnnouncement)
 				.Where(s => s.Quantity > 0)
 				.Include(s => s.Product)
 				.Where(s => s.Product.IsDeleted == false)
 				.Include(s => s.User)
 				.Where(s => s.State != SaleAnnouncementState.Suspended)
-				.Where(s => s.Date >= currentDate)
 				.ToList();
 
-			var combinedList = saleAnnouncementModels.Union(specialoffer).ToList();
+            var combinedList = saleAnnouncementModels.Union(specialoffer).ToList();
 
 			return View(combinedList);
 		}
