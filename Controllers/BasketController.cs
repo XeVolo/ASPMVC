@@ -162,7 +162,7 @@ namespace ASPMVC.Controllers
 			IdentityManager im = new IdentityManager();
 			string id = HttpContext.User.Identity.Name;
 			var query = db.Users.Where(u => u.UserName == id).ToList();
-			var order = new OrderModel { DateTime = DateTime.Today, TotalPrice = 0, ClientId = query[0].Id, State=OrderState.InProgress, DeliveryMethodId=orderView.DeliveryId, PaymentMethodId=orderView.PaymentId  };
+			var order = new OrderModel { DateTime = DateTime.Today, TotalPrice = 0, ClientId = query[0].Id, State=OrderState.Przetwarzane, DeliveryMethodId=orderView.DeliveryId, PaymentMethodId=orderView.PaymentId  };
 			db.Orders.Add(order);
 			db.SaveChanges();
 			List<OrderProduct> orderProducts = new List<OrderProduct>();
