@@ -17,7 +17,7 @@ namespace ASPMVC.Controllers
 		private ApplicationDbContext db = new ApplicationDbContext();
 
 		// GET: SaleAnnouncementModels
-		public ActionResult Index(string searchString)
+		public ActionResult Index(string searchString, int? selectedCategory)
 		{
 			//Session["RequestID"] = Guid.NewGuid().ToString();
 			//IncreaseVisitCount();
@@ -39,10 +39,28 @@ namespace ASPMVC.Controllers
 				.Include (s => s.FilePaths)
 				.ToList();
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString) || selectedCategory != null)
             {
-                saleAnnouncementModels = db.SaleAnnouncements.Where(s => s.Title.Contains(searchString)).ToList();
+                var categoryIds = selectedCategory != null
+        ? db.Categories
+            .Where(c => c.Id == selectedCategory || c.ParentCategoryId == selectedCategory || c.ParentCategory.ParentCategoryId == selectedCategory)
+            .Select(c => c.Id)
+            .ToList()
+        : new List<int>();
+
+    var productIdsInCategories = db.Products
+        .Where(p => categoryIds.Contains(p.CategoryId))
+        .Select(p => p.Id)
+        .ToList();
+
+    saleAnnouncementModels = db.SaleAnnouncements
+        .Where(s =>
+            (String.IsNullOrEmpty(searchString) || s.Title.Contains(searchString)) &&
+            (selectedCategory == null || productIdsInCategories.Contains(s.ProductId))
+        )
+        .ToList();
             }
+            ViewBag.Categories = db.Categories.ToList();
 
             return View(saleAnnouncementModels);
 		}
