@@ -42,25 +42,25 @@ namespace ASPMVC.Controllers
             if (!String.IsNullOrEmpty(searchString) || selectedCategory != null)
             {
                 var categoryIds = selectedCategory != null
-        ? db.Categories
-            .Where(c => c.Id == selectedCategory || c.ParentCategoryId == selectedCategory || c.ParentCategory.ParentCategoryId == selectedCategory)
-            .Select(c => c.Id)
-            .ToList()
-        : new List<int>();
+					? db.Categories
+					.Where(c => c.Id == selectedCategory || c.ParentCategoryId == selectedCategory || c.ParentCategory.ParentCategoryId == selectedCategory)
+					.Select(c => c.Id)
+					.ToList()
+					: new List<int>();
 
-    var productIdsInCategories = db.Products
-        .Where(p => categoryIds.Contains(p.CategoryId))
-        .Select(p => p.Id)
-        .ToList();
+				var productIdsInCategories = db.Products
+					.Where(p => categoryIds.Contains(p.CategoryId))
+					.Select(p => p.Id)
+					.ToList();
 
-    saleAnnouncementModels = db.SaleAnnouncements
-        .Where(s =>
-            (String.IsNullOrEmpty(searchString) || s.Title.Contains(searchString)) &&
-            (selectedCategory == null || productIdsInCategories.Contains(s.ProductId))
-        )
-        .ToList();
-            }
-            ViewBag.Categories = db.Categories.ToList();
+				saleAnnouncementModels = db.SaleAnnouncements
+					.Where(s =>
+						(String.IsNullOrEmpty(searchString) || s.Title.Contains(searchString)) &&
+						(selectedCategory == null || productIdsInCategories.Contains(s.ProductId))
+					)
+					.ToList();
+			}
+			ViewBag.Categories = db.Categories.ToList();
 
             return View(saleAnnouncementModels);
 		}
