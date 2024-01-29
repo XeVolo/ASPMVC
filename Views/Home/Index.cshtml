@@ -24,18 +24,23 @@
 </style>
 <div style="display: flex; justify-content: space-between;">
     <p style="text-align: left; margin: 0;">
-        @Html.ActionLink("Nowości i promocje", "NewsPromotions", new { area = "" }, new { @class = "btn btn-light" })
+        @Html.ActionLink("Nowości i promocje", "NewsPromotions", new { area = "" }, new { @class = "btn btn-light" })      
     </p>
     <h2 class="center-horizontal">Nasze produkty</h2>
     <p style="text-align: right; margin: 0;">
-        Nasz sklep został odwiedzony już <strong>@ViewBag.VisitCount</strong> razy.
+        Nasz sklep został odwiedzony już <strong>@ViewBag.VisitCount</strong> raz(y).
     </p>
 </div>
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "center-horizontal" }))
 {
     <p>
-        @Html.TextBox("searchString", null, new { placeholder = "Wyszukaj ogłoszenia", @class = "search-input" }) <br />
+        @Html.TextBox("searchString", null, new { placeholder = "Wyszukaj ogłoszenia", @class = "search-input" }) 
+        @if (ViewBag.Categories != null && ViewBag.Categories is List<ASPMVC.Models.CategoryModel>)
+        {
+            var categories = ViewBag.Categories as List<ASPMVC.Models.CategoryModel>;
+            @Html.DropDownList("selectedCategory", new SelectList(categories, "Id", "Name"), "Wybierz kategorię", new { @class = "category-dropdown" }) <br />
+        }
         <input type="submit" value="Szukaj" class="btn btn-light" />
     </p>
 }
