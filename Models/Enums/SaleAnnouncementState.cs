@@ -7,8 +7,8 @@ namespace ASPMVC.Models.Enums
 {
 	public enum SaleAnnouncementState
 	{
-		Active=1,
-		Suspended=2,
-		Finished=3,
+		Aktywne=1,
+		Zawieszone=2,
+		Zakonczone=3,
 	}
 }

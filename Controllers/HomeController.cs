@@ -34,7 +34,7 @@ namespace ASPMVC.Controllers
 				.Where(s => s.Quantity > 0)
 				.Include(s => s.Product)
 				.Where(s => s.Product.IsDeleted == false)
-				.Where(s=>s.State!=SaleAnnouncementState.Suspended)
+				.Where(s=>s.State==SaleAnnouncementState.Aktywne)
 				.Include(s => s.User)
 				.Include (s => s.FilePaths)
 				.ToList();
@@ -57,7 +57,7 @@ namespace ASPMVC.Controllers
 				.Include(s => s.Product)
 				.Where(s => s.Product.IsDeleted == false)
 				.Include(s => s.User)
-				.Where(s => s.State != SaleAnnouncementState.Suspended)
+				.Where(s => s.State == SaleAnnouncementState.Aktywne)
 				.Where(s => s.Date >= currentDate)
 				.ToList();
 
@@ -69,7 +69,7 @@ namespace ASPMVC.Controllers
 				.Include(s => s.Product)
 				.Where(s => s.Product.IsDeleted == false)
 				.Include(s => s.User)
-				.Where(s => s.State != SaleAnnouncementState.Suspended)
+				.Where(s => s.State == SaleAnnouncementState.Aktywne)
 				.ToList();
 
             var combinedList = saleAnnouncementModels.Union(specialoffer).ToList();

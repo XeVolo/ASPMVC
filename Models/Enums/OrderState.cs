@@ -7,9 +7,9 @@ namespace ASPMVC.Models.Enums
 {
 	public enum OrderState
 	{
-		New = 1,          
-		InProgress = 2,    
-		Completed = 3,   
-		Canceled = 4
+		Nowe = 1,          
+		Przetwarzane = 2,    
+		Wyslane = 3,   
+		Anulowane = 4
 	}
 }
