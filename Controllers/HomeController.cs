@@ -57,8 +57,8 @@ namespace ASPMVC.Controllers
 					.Where(s =>
 						(String.IsNullOrEmpty(searchString) || s.Title.Contains(searchString)) &&
 						(selectedCategory == null || productIdsInCategories.Contains(s.ProductId))
-					)
-					.ToList();
+					).Where(s => s.State == SaleAnnouncementState.Aktywne)
+                    .ToList();
 			}
 			ViewBag.Categories = db.Categories.ToList();
 
